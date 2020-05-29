@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	. "awesomeProject/controller"
-	. "awesomeProject/helper"
+	. "filestore-server/controller"
+	. "filestore-server/helper"
 )
 
 func main() {

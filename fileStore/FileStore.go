@@ -7,8 +7,8 @@ import (
 	"path"
 	"time"
 
-	"awesomeProject/helper"
-	"awesomeProject/model"
+	"filestore-server/helper"
+	"filestore-server/model"
 )
 
 //默认值

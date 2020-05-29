@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"awesomeProject/helper"
+	"filestore-server/helper"
 )
 
 //手动实现一个mysql_writer,作为输出流对象传递到log

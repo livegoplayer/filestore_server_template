@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"awesomeProject/fileStore"
-	"awesomeProject/helper"
+	"filestore-server/fileStore"
+	"filestore-server/helper"
 )
 
 func UpLoadHandler(c *gin.Context) {

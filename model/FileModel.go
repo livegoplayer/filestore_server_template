@@ -1,7 +1,7 @@
 package model
 
 import (
-	"awesomeProject/dbHelper"
+	"filestore-server/dbHelper"
 )
 
 type File struct {
