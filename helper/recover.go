@@ -2,6 +2,7 @@ package helper
 
 //处理全局panic的返回值，重写gin.Recover中间件的内容
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -67,6 +68,7 @@ func ErrHandler() gin.HandlerFunc {
 				}
 				// 记录一个错误的日志
 				c.JSON(Err.StatusCode, Err)
+				fmt.Print()
 				return
 			}
 		}()
