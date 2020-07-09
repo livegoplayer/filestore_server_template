@@ -7,8 +7,8 @@ import (
 	"path"
 	"time"
 
-	"filestore-server/helper"
-	"filestore-server/model"
+	myHelper "github.com/livegoplayer/go_helper"
+	"github.com/livegoplsyer/filestore-server/model"
 )
 
 //默认值
@@ -54,7 +54,7 @@ func SaveFileToDir(file multipart.File, newFileName string, toPath string) (*Fil
 	fileMeta.FileSize = fileSize
 	//文件指针重置
 	_, _ = createdFile.Seek(0, 0)
-	fileMeta.FileSha1 = helper.FileSha1(createdFile)
+	fileMeta.FileSha1 = myHelper.FileSha1(createdFile)
 	fileMeta.Location = toPath + newFileName
 	fileMeta.UploadTime = time.Now()
 	fileMeta.UpdateTime = time.Now()
@@ -67,18 +67,18 @@ func AddFileToUser(fileHeader *multipart.FileHeader, newFileName string, toPath 
 	fileMeta = nil
 	err = nil
 
-	file, err := helper.GetFileByHeader(fileHeader)
+	file, err := myHelper.GetFileByHeader(fileHeader)
 	if err != nil {
 		return
 	}
-	fileSha1 := helper.FileSha1(file)
+	fileSha1 := myHelper.FileSha1(file)
 
 	//如果该文件存在
 	if fileModel, exist := model.CheckFileExist(fileSha1); exist {
 		fileMeta = GetFileMetaByFile(fileModel)
 	} else {
 		//重新获取file对象，因为file被sha1方法破坏了
-		file, err = helper.GetFileByHeader(fileHeader)
+		file, err = myHelper.GetFileByHeader(fileHeader)
 		if err != nil {
 			return
 		}
@@ -98,7 +98,7 @@ func AddFileToUser(fileHeader *multipart.FileHeader, newFileName string, toPath 
 //根据文件后缀名获取默认存储路径
 func getDefaultPath(fileName string) (string, error) {
 	ext := path.Ext(fileName)
-	defaultSavePath := helper.PathToCommon(path.Join("./files/", ext[1:], "/"))
+	defaultSavePath := myHelper.PathToCommon(path.Join("./files/", ext[1:], "/"))
 
 	//确保文件夹已经存在
 	err := os.MkdirAll(defaultSavePath, 0666)
@@ -116,8 +116,8 @@ func GetFileMetaByFile(file *model.File) *FileMeta {
 	fileMeta.FileSha1 = file.FileSha1
 	fileMeta.FileSize = file.Size
 	fileMeta.Location = file.Path
-	fileMeta.UpdateTime = helper.Stamp2Time(file.UpdateDatetime)
-	fileMeta.UploadTime = helper.Stamp2Time(file.AddDatetime)
+	fileMeta.UpdateTime = myHelper.Stamp2Time(file.UpdateDatetime)
+	fileMeta.UploadTime = myHelper.Stamp2Time(file.AddDatetime)
 
 	return fileMeta
 }

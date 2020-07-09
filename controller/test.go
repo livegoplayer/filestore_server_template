@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"filestore-server/helper"
-	user "filestore-server/rpc"
-	userpb "filestore-server/rpc/grpc"
+	myHelper "github.com/livegoplayer/go_helper"
+	user "github.com/livegoplayer/go_user_rpc/user"
+	userpb "github.com/livegoplayer/go_user_rpc/user/grpc"
 )
 
 func TestHandler(c *gin.Context) {
@@ -19,10 +19,10 @@ func TestHandler(c *gin.Context) {
 		Password: "123456",
 	})
 
-	helper.CheckError(err, "新建用户失败")
+	myHelper.CheckError(err, "新建用户失败")
 
 	data := res.GetData()
 	fmt.Printf(string(data.GetUid()))
 
-	helper.SuccessResp(c, "ok", data)
+	myHelper.SuccessResp(c, "ok", data)
 }

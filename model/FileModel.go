@@ -1,7 +1,7 @@
 package model
 
 import (
-	"filestore-server/dbHelper"
+	"github.com/livegoplsyer/filestore-server/dbHelper"
 )
 
 type File struct {

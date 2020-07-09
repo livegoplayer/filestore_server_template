@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	. "filestore-server/controller"
-	. "filestore-server/helper"
+	. "github.com/livegoplayer/go_helper"
+	. "github.com/livegoplsyer/filestore-server/controller"
 )
 
 func main() {
