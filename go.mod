@@ -9,7 +9,7 @@ require (
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/jinzhu/gorm v1.9.15
-	github.com/livegoplayer/go_gin_helper v1.0.3
+	github.com/livegoplayer/go_gin_helper v1.0.4
 	github.com/livegoplayer/go_helper v1.0.40
 	github.com/livegoplayer/go_logger v1.0.12
 	github.com/livegoplayer/go_user_rpc v1.0.29

@@ -22,7 +22,7 @@ func UpLoadHandler(c *gin.Context) {
 	defer file.Close()
 	ginHelper.CheckError(err, "保存文件信息失败")
 
-	ginHelper.SuccessResp(c, "ok")
+	ginHelper.SuccessResp("ok")
 }
 
 func UploadSuccessHandler(response http.ResponseWriter, request *http.Request) {

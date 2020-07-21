@@ -24,5 +24,5 @@ func TestHandler(c *gin.Context) {
 	data := res.GetData()
 	fmt.Printf(string(data.GetUid()))
 
-	ginHelper.SuccessResp(c, "ok", data)
+	ginHelper.SuccessResp("ok", data)
 }
