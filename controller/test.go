@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	ginHelper "github.com/livegoplayer/go_gin_helper"
 
-	myHelper "github.com/livegoplayer/go_helper"
 	user "github.com/livegoplayer/go_user_rpc/user"
 	userpb "github.com/livegoplayer/go_user_rpc/user/grpc"
 )
@@ -19,10 +19,10 @@ func TestHandler(c *gin.Context) {
 		Password: "123456",
 	})
 
-	myHelper.CheckError(err, "新建用户失败")
+	ginHelper.CheckError(err, "新建用户失败")
 
 	data := res.GetData()
 	fmt.Printf(string(data.GetUid()))
 
-	myHelper.SuccessResp(c, "ok", data)
+	ginHelper.SuccessResp(c, "ok", data)
 }
