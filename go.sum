@@ -265,6 +265,8 @@ github.com/livegoplayer/go_gin_helper v1.0.3 h1:6Sk1hLNJTKBDYcwRTBtfCA2d967gJBl0
 github.com/livegoplayer/go_gin_helper v1.0.3/go.mod h1:A1ACUC9ZQTA9J48EKohDlxBkOVPeKlCnochMFdlggBc=
 github.com/livegoplayer/go_gin_helper v1.0.4 h1:lD9+Euj5b1K2tL09O6i559o+LzsxlzaRqruAj8L2kCY=
 github.com/livegoplayer/go_gin_helper v1.0.4/go.mod h1:A1ACUC9ZQTA9J48EKohDlxBkOVPeKlCnochMFdlggBc=
+github.com/livegoplayer/go_gin_helper v1.0.5 h1:dlHR8/o+GFOPN8XhVbi3byVYirBKb96ix79hpNVAhRA=
+github.com/livegoplayer/go_gin_helper v1.0.5/go.mod h1:A1ACUC9ZQTA9J48EKohDlxBkOVPeKlCnochMFdlggBc=
 github.com/livegoplayer/go_helper v0.0.0-20200629061256-7c48ccb9f7bc h1:Ox83JfYoA03vO9JLHDoYe7DpkGl4bwmVbTHcUzY5bEU=
 github.com/livegoplayer/go_helper v0.0.0-20200629061256-7c48ccb9f7bc/go.mod h1:wcJ6ow/Wic2tHqZKEx47l9cBqOo+NiLWY4I57LEJ18A=
 github.com/livegoplayer/go_helper v1.0.30/go.mod h1:LGRakEGtvEiNzEl29mNVsr2U0Is9v+x2bvru75WUazk=
