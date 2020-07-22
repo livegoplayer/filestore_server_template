@@ -1,0 +1,17 @@
+{
+  "client_list" : [
+    "http://127.0.0.1:8081",
+    "http://127.0.0.1:8080"
+  ],
+
+  "log" : {
+    "access_log_file_path" : "../log",
+    "access_log_file_name" : "access.log",
+    "app_log_mysql_host": "139.224.132.234",
+    "app_log_mysql_port": "3306",
+    "app_log_mysql_db_name": "user",
+    "app_log_mysql_table_name": "us_app_log",
+    "app_log_mysql_user": "myuser",
+    "app_log_mysql_pass": "myuser"
+  }
+}

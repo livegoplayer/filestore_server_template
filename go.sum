@@ -267,6 +267,10 @@ github.com/livegoplayer/go_gin_helper v1.0.4 h1:lD9+Euj5b1K2tL09O6i559o+LzsxlzaR
 github.com/livegoplayer/go_gin_helper v1.0.4/go.mod h1:A1ACUC9ZQTA9J48EKohDlxBkOVPeKlCnochMFdlggBc=
 github.com/livegoplayer/go_gin_helper v1.0.5 h1:dlHR8/o+GFOPN8XhVbi3byVYirBKb96ix79hpNVAhRA=
 github.com/livegoplayer/go_gin_helper v1.0.5/go.mod h1:A1ACUC9ZQTA9J48EKohDlxBkOVPeKlCnochMFdlggBc=
+github.com/livegoplayer/go_gin_helper v1.0.6 h1:flPA9+hnleJnFrwPDxxbNFVQmqDxq3g5ORZU9pfwVHc=
+github.com/livegoplayer/go_gin_helper v1.0.6/go.mod h1:A1ACUC9ZQTA9J48EKohDlxBkOVPeKlCnochMFdlggBc=
+github.com/livegoplayer/go_gin_helper v1.0.8 h1:7WfrClkAvBuQ1oAZJeufdv+M9mwbisJCIZ10FGDSthI=
+github.com/livegoplayer/go_gin_helper v1.0.8/go.mod h1:A1ACUC9ZQTA9J48EKohDlxBkOVPeKlCnochMFdlggBc=
 github.com/livegoplayer/go_helper v0.0.0-20200629061256-7c48ccb9f7bc h1:Ox83JfYoA03vO9JLHDoYe7DpkGl4bwmVbTHcUzY5bEU=
 github.com/livegoplayer/go_helper v0.0.0-20200629061256-7c48ccb9f7bc/go.mod h1:wcJ6ow/Wic2tHqZKEx47l9cBqOo+NiLWY4I57LEJ18A=
 github.com/livegoplayer/go_helper v1.0.30/go.mod h1:LGRakEGtvEiNzEl29mNVsr2U0Is9v+x2bvru75WUazk=
@@ -278,6 +282,8 @@ github.com/livegoplayer/go_logger v0.0.0-20200629083457-44ddad95dd7c h1:psBEIL40
 github.com/livegoplayer/go_logger v0.0.0-20200629083457-44ddad95dd7c/go.mod h1:M4wW1TEEDDRg68rfv+KJBL++l0mgWUDBPP6RhuzMnDA=
 github.com/livegoplayer/go_logger v1.0.12 h1:oJF/WQo+ARGuFqrkf26INKjLtZxbJtsDiXgGw9Yo5TM=
 github.com/livegoplayer/go_logger v1.0.12/go.mod h1:w6Cv+hxj6rHeUYEQi6ijKThGs1F6JXAr2Ze3Ei/EsgM=
+github.com/livegoplayer/go_logger v1.0.13 h1:bDsJlsBNduI44BPLnh3bsWCVu2XqsnLGizRsJwbioc4=
+github.com/livegoplayer/go_logger v1.0.13/go.mod h1:w6Cv+hxj6rHeUYEQi6ijKThGs1F6JXAr2Ze3Ei/EsgM=
 github.com/livegoplayer/go_redis_helper v1.0.1 h1:YMlQJDcgWzGtGHzp0Hu4k53OxKBxSzbULECAFdp27j0=
 github.com/livegoplayer/go_redis_helper v1.0.1/go.mod h1:sl3wasjvOSnl8Gpzf1BDl5OBrAylGcMkVzry+GkYZyc=
 github.com/livegoplayer/go_user_rpc v0.0.0-20200709033048-77747c90f51e h1:ikURCz9+503Psb2Qm6wzqdEsTB/dQVLDPcVyo8bPhbs=

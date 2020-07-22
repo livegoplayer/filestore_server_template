@@ -5,14 +5,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	. "github.com/livegoplsyer/filestore-server/controller"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
 	ginHelper "github.com/livegoplayer/go_gin_helper"
 	. "github.com/livegoplayer/go_helper"
 	myLogger "github.com/livegoplayer/go_logger"
-
-	. "github.com/livegoplsyer/filestore-server/controller"
 )
 
 func main() {
@@ -48,7 +47,6 @@ func main() {
 	if gin.IsDebugging() {
 		r.Use(gin.Logger())
 		//额外输出错误异常栈
-		r.Use(gin.Recovery())
 	}
 
 	//app_log
@@ -62,7 +60,7 @@ func main() {
 	myLogger.SetLogger(appLogger)
 
 	//解决跨域问题的中间件
-	r.Use(ginHelper.Cors())
+	r.Use(ginHelper.Cors(viper.GetStringSlice("client_list")))
 
 	//更换校验器
 	binding.Validator = ValidatorV10
@@ -70,6 +68,9 @@ func main() {
 	// 设置一个get请求的路由，url为/ping, 处理函数（或者叫控制器函数）是一个闭包函数。
 	r.POST("/api/file/upload", UpLoadHandler)
 	r.GET("/api/file/test", TestHandler)
+
+	//以下是给子服务器请求的方法
+	r.POST("/api/user/checkToken", CheckTokenHandler)
 
 	err := r.Run(":9090") // 监听并在 9090 上启动服务
 	if err != nil {
