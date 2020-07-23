@@ -35,19 +35,36 @@ func UpLoadHandler(c *gin.Context) {
 }
 
 type GetFileListRequest struct {
-	Uid    int `form:"uid" validate:"required, number"`
-	PathId int `form:"path_id" validate:"required, number"`
+	Uid    int `form:"uid" validate:"number,gt=0" json:"uid"`
+	PathId int `form:"path_id" validate:"number" json:"path_id"`
 }
 
 func GetFileListHandler(c *gin.Context) {
 	getFileListRequest := &GetFileListRequest{}
-	err := c.Bind(getFileListRequest)
+	err := c.BindQuery(getFileListRequest)
 	ginHelper.CheckError(err, "参数校验错误")
 
 	fileList := fileStore.GetFileListByPathId(getFileListRequest.Uid, getFileListRequest.PathId)
 	data := make(map[string]interface{})
 
 	data["file_list"] = fileList
+	data["path_id"] = getFileListRequest.PathId
+	ginHelper.SuccessResp("ok", data)
+}
+
+type GetUserPathList struct {
+	Uid int `form:"uid" validate:"number,gt=0" json:"uid"`
+}
+
+func GetUserPathListHandler(c *gin.Context) {
+	getUserPathList := &GetUserPathList{}
+	err := c.BindQuery(getUserPathList)
+	ginHelper.CheckError(err, "参数校验错误")
+
+	pathList := fileStore.GetUserPathList(getUserPathList.Uid)
+	data := make(map[string]interface{})
+
+	data["path_list"] = pathList
 	ginHelper.SuccessResp("ok", data)
 }
 

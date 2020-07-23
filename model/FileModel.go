@@ -26,6 +26,7 @@ type RetUserFile struct {
 	FileName string `gorm:"column:filename" json:"file_name"`
 	FileId   int    `gorm:"column:file_id" json:"file_id"`
 	Type     string `gorm:"column:type" json:"type"`
+	FileSize int64  `gorm:"column:type" json:"size"`
 	PathId   int    `gorm:"column:path_id" json:"path_id"`
 }
 
@@ -38,10 +39,10 @@ func (u *RetUserFile) TableName() string {
 type UserPath struct {
 	Model
 	ID       int    //会被自动认为是主键
-	UserId   int    `gorm:"column:uid"`
-	Type     int    `gorm:"column:type"`
-	PathName string `gorm:"column:path_name"`
-	ParentId int    `gorm:"column:parent_id"`
+	UserId   int    `gorm:"column:uid" json:"user_id"`
+	Type     int    `gorm:"column:type" json:"type"`
+	PathName string `gorm:"column:path_name" json:"path_name"`
+	ParentId int    `gorm:"column:parent_id" json:"parent_id"`
 }
 
 //设置表名，可以通过给struct类型定义 TableName函数，返回当前struct绑定的mysql表名是什么
@@ -77,11 +78,11 @@ func SaveFileToMysql(fileSha1 string, path string, fileSize int64) int {
 	return nFileModel.Id
 }
 
-func SaveFileToUser(fileId int, fileName string, uid int, pathId int) int {
+func SaveFileToUser(fileId int, fileName string, uid int, pathId int, fileSize int64) int {
 	db := dbHelper.GetDB()
 
 	fileType := myHelper.GetFileExtName(fileName)
-	RetUserFileModel := &RetUserFile{UserId: uid, FileId: fileId, FileName: fileName, PathId: pathId, Type: fileType}
+	RetUserFileModel := &RetUserFile{UserId: uid, FileId: fileId, FileName: fileName, PathId: pathId, Type: fileType, FileSize: fileSize}
 
 	if err := db.Create(RetUserFileModel).Error; err != nil {
 		panic(err)
@@ -94,11 +95,22 @@ func GetFileListByPath(uid int, pathId int) []RetUserFile {
 	db := dbHelper.GetDB()
 
 	var fileList []RetUserFile
-	if err := db.Model(&RetUserFile{}).Where("uid = ? and path_id =?", uid, pathId).Find(fileList).Error; err != nil {
+	if err := db.Model(&RetUserFile{}).Where("uid = ? and path_id =?", uid, pathId).Find(&fileList).Error; err != nil {
 		panic(err)
 	}
 
 	return fileList
+}
+
+func GetUserPathList(uid int) []UserPath {
+	db := dbHelper.GetDB()
+
+	var pathList []UserPath
+	if err := db.Model(&UserPath{}).Where("uid = ?", uid).Find(&pathList).Error; err != nil {
+		panic(err)
+	}
+
+	return pathList
 }
 
 //根据两个实例拼接真正的FileMeta

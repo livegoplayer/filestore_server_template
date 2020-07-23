@@ -73,9 +73,11 @@ func main() {
 	r.POST("/api/file/upload", UpLoadHandler)
 	r.GET("/api/file/test", TestHandler)
 
-	//以下是给子服务器请求的方法
 	r.POST("/api/user/checkToken", CheckTokenHandler)
-	r.GET("/api/user/getFileList", GetFileListHandler)
+
+	//获取文件列表
+	r.GET("/api/file/getFileList", GetFileListHandler)
+	r.GET("/api/file/getPathList", GetUserPathListHandler)
 
 	err := r.Run(":9090") // 监听并在 9090 上启动服务
 	if err != nil {

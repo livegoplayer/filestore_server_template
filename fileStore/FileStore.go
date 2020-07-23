@@ -91,7 +91,7 @@ func AddFileToUser(fileHeader *multipart.FileHeader, newFileName string, toPath 
 		}
 		fileId := model.SaveFileToMysql(fileMeta.FileSha1, fileMeta.Location, fileMeta.FileSize)
 		if fileId > 0 {
-			_ = model.SaveFileToUser(fileId, newFileName, uid, pathId)
+			_ = model.SaveFileToUser(fileId, newFileName, uid, pathId, fileMeta.FileSize)
 		}
 	}
 
@@ -122,6 +122,10 @@ func getDefaultPath(fileName string) (string, error) {
 
 func GetFileListByPathId(uid int, pathId int) []model.RetUserFile {
 	return model.GetFileListByPath(uid, pathId)
+}
+
+func GetUserPathList(uid int) []model.UserPath {
+	return model.GetUserPathList(uid)
 }
 
 //根据file获取初始化好的FileMeta对象 todo 增加user file对象
