@@ -13,5 +13,15 @@
     "app_log_mysql_table_name": "us_app_log",
     "app_log_mysql_user": "myuser",
     "app_log_mysql_pass": "myuser"
+  },
+
+  "database" : {
+    "Username": "myuser",
+    "Password": "myuser",
+    "Host": "139.224.132.234",
+    "Port": 3306,
+    "Dbname": "file_store",
+    "max_open_connection" : 100,
+    "max_idle_connection" : 20
   }
 }

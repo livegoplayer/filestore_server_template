@@ -1,4 +1,4 @@
-module github.com/livegoplsyer/filestore-server
+module github.com/livegoplayer/filestore-server
 
 go 1.14
 
@@ -9,8 +9,9 @@ require (
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/jinzhu/gorm v1.9.15
-	github.com/livegoplayer/go_gin_helper v1.0.8
-	github.com/livegoplayer/go_helper v1.0.40
+	github.com/livegoplayer/go_db_helper v1.0.1
+	github.com/livegoplayer/go_gin_helper v1.0.9
+	github.com/livegoplayer/go_helper v1.0.41
 	github.com/livegoplayer/go_logger v1.0.13
 	github.com/livegoplayer/go_user_rpc v1.0.29
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
@@ -19,6 +20,6 @@ require (
 	github.com/tebeka/strftime v0.1.4 // indirect
 	golang.org/x/sys v0.0.0-20200720211630-cb9d2d5c5666 // indirect
 	golang.org/x/text v0.3.3 // indirect
-	google.golang.org/genproto v0.0.0-20200721032028-5044d0edf986 // indirect
+	google.golang.org/genproto v0.0.0-20200722002428-88e341933a54 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )

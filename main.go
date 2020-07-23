@@ -5,10 +5,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	. "github.com/livegoplsyer/filestore-server/controller"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
+	. "github.com/livegoplayer/filestore-server/controller"
+
+	dbHelper "github.com/livegoplayer/go_db_helper"
 	ginHelper "github.com/livegoplayer/go_gin_helper"
 	. "github.com/livegoplayer/go_helper"
 	myLogger "github.com/livegoplayer/go_logger"
@@ -62,6 +64,8 @@ func main() {
 	//解决跨域问题的中间件
 	r.Use(ginHelper.Cors(viper.GetStringSlice("client_list")))
 
+	dbHelper.InitDbHelper(&dbHelper.MysqlConfig{Username: viper.GetString("database.username"), Password: viper.GetString("database.password"), Host: viper.GetString("database.host"), Port: int32(viper.GetInt("database.port")), Dbname: viper.GetString("database.dbname")}, viper.GetBool("database.log_mode"), viper.GetInt("database.max_open_connection"), viper.GetInt("database.max_idle_connection"))
+
 	//更换校验器
 	binding.Validator = ValidatorV10
 
@@ -71,6 +75,7 @@ func main() {
 
 	//以下是给子服务器请求的方法
 	r.POST("/api/user/checkToken", CheckTokenHandler)
+	r.GET("/api/user/getFileList", GetFileListHandler)
 
 	err := r.Run(":9090") // 监听并在 9090 上启动服务
 	if err != nil {

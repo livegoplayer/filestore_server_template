@@ -10,6 +10,8 @@ type FileMeta struct {
 	FileSha1   string
 	FileSize   int64 //复制的字节数，主要是io.copy返回的第一个参数
 	Location   string
+	Path       int64
+	Type       string
 	UploadTime time.Time
 	UpdateTime time.Time
 }
