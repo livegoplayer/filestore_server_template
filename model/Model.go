@@ -5,8 +5,8 @@ import (
 )
 
 type Model struct {
-	AddDatetime    string `gorm:"column:add_datetime;-"`
-	UpdateDatetime string `gorm:"column:update_datetime;-"`
+	AddDatetime    string `gorm:"column:add_datetime;-" json:"add_datetime"`
+	UpdateDatetime string `gorm:"column:upt_datetime;-" json:"update_datetime"`
 }
 
 var (

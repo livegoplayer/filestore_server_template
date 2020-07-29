@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	ginHelper "github.com/livegoplayer/go_gin_helper"
 
-	user "github.com/livegoplayer/go_user_rpc/user"
+	"github.com/livegoplayer/go_user_rpc/user"
 	userpb "github.com/livegoplayer/go_user_rpc/user/grpc"
 )
 

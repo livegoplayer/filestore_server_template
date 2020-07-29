@@ -1,10 +1,14 @@
 package controller
 
 import (
+	"time"
+
 	"github.com/gin-gonic/gin"
 	ginHelper "github.com/livegoplayer/go_gin_helper"
+	myLogger "github.com/livegoplayer/go_logger"
 	"github.com/livegoplayer/go_user_rpc/user"
 	userpb "github.com/livegoplayer/go_user_rpc/user/grpc"
+	"github.com/spf13/viper"
 )
 
 type checkUserStatusRes struct {
@@ -15,28 +19,77 @@ type checkUserStatusRes struct {
 
 //子服务器请求检查是否登录
 func CheckTokenHandler(c *gin.Context) {
-	//设置本域名下的cookie
+	//获取token，如果没有就设置
 	token, err := c.Cookie("us_user_cookie")
 	if token == "" {
 		token = c.Request.FormValue("token")
-	}
-	//检查session是否存在
-	//如果没有token，证明没有登录
-	data := &checkUserStatusRes{}
-	if token == "" {
-		ginHelper.SuccessResp("ok", data)
+		if token == "" {
+			ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
+		}
+		//设置一下cookie
+		c.SetCookie("us_user_cookie", token, int(time.Hour.Seconds()*6), "/", "", false, false)
 	}
 
+	//如果没有token，证明没有登录
+	data := &checkUserStatusRes{}
 	checkUserStatusRequest := &userpb.CheckUserStatusRequest{}
 	checkUserStatusRequest.Token = token
 
 	userClient := user.GetUserClient()
 	res, err := userClient.CheckUserStatus(c, checkUserStatusRequest)
-	ginHelper.CheckError(err, "检查用户登录状态失败")
-
+	if err != nil {
+		if gin.IsDebugging() {
+			ginHelper.CheckError(err)
+		} else {
+			myLogger.Error("获取用户鉴权失败" + err.Error())
+			ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
+		}
+	}
+	//如果没有登录的话
+	if res.GetData().IsLogin == false {
+		ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
+	}
 	data.UserSession = res.GetData().UserSession
 	data.IsLogin = res.GetData().IsLogin
 	data.Token = res.GetData().Token
 
 	ginHelper.SuccessResp("ok", data)
+}
+
+//子服务器请求检查是否登录
+func CommonCheckTokenHandler(c *gin.Context) {
+	//获取token，如果没有就设置
+	token, err := c.Cookie("us_user_cookie")
+	if token == "" {
+		token = c.Request.FormValue("token")
+		if token == "" {
+			ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
+		}
+		//设置一下cookie
+		c.SetCookie("us_user_cookie", token, int(time.Hour.Seconds()*6), "/", "", false, false)
+	}
+
+	//如果没有token，证明没有登录
+	data := &checkUserStatusRes{}
+	checkUserStatusRequest := &userpb.CheckUserStatusRequest{}
+	checkUserStatusRequest.Token = token
+
+	userClient := user.GetUserClient()
+	res, err := userClient.CheckUserStatus(c, checkUserStatusRequest)
+	if err != nil {
+		if gin.IsDebugging() {
+			ginHelper.CheckError(err)
+		} else {
+			myLogger.Error("获取用户鉴权失败" + err.Error())
+			ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
+		}
+	}
+
+	//如果没有登录的话
+	if res.GetData().IsLogin == false {
+		ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
+	}
+	data.UserSession = res.GetData().UserSession
+	data.IsLogin = res.GetData().IsLogin
+	data.Token = res.GetData().Token
 }

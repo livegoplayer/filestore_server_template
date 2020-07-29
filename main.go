@@ -8,6 +8,9 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
+	"github.com/livegoplayer/filestore-server/fileStore"
+	. "github.com/livegoplayer/filestore-server/routers"
+
 	. "github.com/livegoplayer/filestore-server/controller"
 
 	dbHelper "github.com/livegoplayer/go_db_helper"
@@ -43,15 +46,15 @@ func main() {
 	r.Use(ginHelper.ErrHandler())
 
 	//gin的格式化参数
-	//改造access log, 输出到文件
-	r.Use(myLogger.GetGinAccessFileLogger(viper.GetString("log.access_log_file_path"), viper.GetString("log.access_log_file_name")))
+	//初始化access_log
+	r.Use(myLogger.GetGinAccessFileLogger(viper.GetString("log.access_log_file_path"), viper.GetString("app_name")+"_"+viper.GetString("log.access_log_file_name")))
 	//如果是debug模式的话，使用logger另外打印一份输出到控制台的logger
 	if gin.IsDebugging() {
 		r.Use(gin.Logger())
 		//额外输出错误异常栈
 	}
 
-	//app_log
+	//初始化 app_log， 以后使用mylogger.Info() 打印log
 	//如果是debug模式的话，直接打印到控制台
 	var appLogger *logrus.Logger
 	if gin.IsDebugging() {
@@ -64,26 +67,26 @@ func main() {
 	//解决跨域问题的中间件
 	r.Use(ginHelper.Cors(viper.GetStringSlice("client_list")))
 
+	//初始化数据库连接池
 	dbHelper.InitDbHelper(&dbHelper.MysqlConfig{Username: viper.GetString("database.username"), Password: viper.GetString("database.password"), Host: viper.GetString("database.host"), Port: int32(viper.GetInt("database.port")), Dbname: viper.GetString("database.dbname")}, viper.GetBool("database.log_mode"), viper.GetInt("database.max_open_connection"), viper.GetInt("database.max_idle_connection"))
+
+	//oss上传
+	fileStore.InitOSSClient(viper.GetString("oss.accessKeyId"), viper.GetString("oss.accessKeySecret"), viper.GetString("oss.endpoint"))
 
 	//更换校验器
 	binding.Validator = ValidatorV10
 
-	// 设置一个get请求的路由，url为/ping, 处理函数（或者叫控制器函数）是一个闭包函数。
-	r.POST("/api/file/upload", UpLoadHandler)
-	r.GET("/api/file/test", TestHandler)
+	InitAppRouter(r)
 
-	r.POST("/api/user/checkToken", CheckTokenHandler)
+	//根据需求开关验证逻辑，如果需要postman测试 接口的话，建议关闭此选项
+	if viper.GetBool("auth_middleware") {
+		//初始化验证
+		ginHelper.AuthenticationMiddleware(CommonCheckTokenHandler)
+	}
 
-	//获取文件列表
-	r.GET("/api/file/getFileList", GetFileListHandler)
-	r.GET("/api/file/getPathList", GetUserPathListHandler)
-
-	err := r.Run(":9090") // 监听并在 9090 上启动服务
+	err := r.Run(":" + viper.GetString("app_port"))
 	if err != nil {
 		fmt.Printf("server start error : " + err.Error())
 		return
 	}
-
-	fmt.Printf("server is running !")
 }
