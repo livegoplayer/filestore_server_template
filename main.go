@@ -8,6 +8,8 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
+	userRpc "github.com/livegoplayer/go_user_rpc/user"
+
 	"github.com/livegoplayer/filestore-server/fileStore"
 	. "github.com/livegoplayer/filestore-server/routers"
 
@@ -78,11 +80,15 @@ func main() {
 
 	InitAppRouter(r)
 
+	userRpc.InitUserClient(viper.GetString("sso_host"))
+
 	//根据需求开关验证逻辑，如果需要postman测试 接口的话，建议关闭此选项
 	if viper.GetBool("auth_middleware") {
 		//初始化验证
 		ginHelper.AuthenticationMiddleware(CommonCheckTokenHandler)
 	}
+
+	fmt.Printf(viper.GetString("app_port"))
 
 	err := r.Run(":" + viper.GetString("app_port"))
 	if err != nil {

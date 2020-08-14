@@ -12,6 +12,7 @@ func InitAppRouter(r gin.IRoutes) {
 	r.GET("/api/file/test", TestHandler)
 
 	r.POST("/api/user/checkToken", CheckTokenHandler)
+	r.POST("/api/user/logout", LogoutHandler)
 
 	//获取文件列表
 	r.GET("/api/file/getFileList", GetFileListHandler)

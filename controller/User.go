@@ -23,6 +23,7 @@ func CheckTokenHandler(c *gin.Context) {
 	token, err := c.Cookie("us_user_cookie")
 	if token == "" {
 		token = c.Request.FormValue("token")
+
 		if token == "" {
 			ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
 		}
@@ -56,7 +57,23 @@ func CheckTokenHandler(c *gin.Context) {
 	ginHelper.SuccessResp("ok", data)
 }
 
-//子服务器请求检查是否登录
+func LogoutHandler(c *gin.Context) {
+	//设置本域名下的cookie
+	c.SetCookie("us_user_cookie", "", -1, "/", "", false, false)
+	logoutRequest := &userpb.LogoutRequest{}
+	err := c.Bind(logoutRequest)
+	ginHelper.CheckError(err)
+
+	userClient := user.GetUserClient()
+	response, err := userClient.Logout(c, logoutRequest)
+	ginHelper.CheckError(err)
+
+	data := response.GetData()
+
+	ginHelper.SuccessResp("ok", data)
+}
+
+//主服务器请求检查是否登录
 func CommonCheckTokenHandler(c *gin.Context) {
 	//获取token，如果没有就设置
 	token, err := c.Cookie("us_user_cookie")

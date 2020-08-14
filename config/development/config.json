@@ -1,16 +1,16 @@
 {
 
-  "client_list": [
-    "http://127.0.0.1:8081",
-    "http://127.0.0.1:8080"
+  "client_list" : [
+    "http://testlocal.52db.xyz:8081",
+    "http://testlocal.52db.work:8080"
   ],
 
   "app_name" : "file_store",
-  "app_host" : "http://127.0.0.1:9090",
-  "app_port" : "9090",
+  "app_host" : "testlocal.52db.xyz:9091",
+  "app_port" : "9091",
 
   "auth_middleware": true,
-  "user_app_host" : "http://127.0.0.1:8080/main",
+  "user_app_host" : "http://testlocal.52db.work:8080/main",
 
   "log": {
     "access_log_file_path": "../log",
@@ -29,8 +29,12 @@
     "host": "139.224.132.234",
     "port": 3306,
     "dbname": "file_store",
-    "log_mode": true
+    "log_mode": true,
+    "max_open_connection": 10,
+    "max_idle_connection": 200
   },
+
+  "sso_host": "testlocal.52db.work:8888",
 
   "oss": {
     "endpoint": "oss-cn-shanghai.aliyuncs.com",
