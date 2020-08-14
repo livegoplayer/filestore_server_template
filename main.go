@@ -82,6 +82,8 @@ func main() {
 
 	userRpc.InitUserClient(viper.GetString("sso_host"))
 
+	fmt.Printf("init userClientSuccess")
+
 	//根据需求开关验证逻辑，如果需要postman测试 接口的话，建议关闭此选项
 	if viper.GetBool("auth_middleware") {
 		//初始化验证

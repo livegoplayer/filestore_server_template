@@ -10,7 +10,7 @@
   "app_port" : "9091",
 
   "auth_middleware": true,
-  "user_app_host" : "http://testlocal.52db.work:8080/main",
+  "user_app_host" : "http://testlocal.52db.work:8080",
 
   "log": {
     "access_log_file_path": "../log",
