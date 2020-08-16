@@ -200,7 +200,7 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	ginHelper.CheckError(err, "参数校验错误")
 	data := make(map[string]interface{})
 
-	bucketName := viper.GetString("oss.bucket_name")
+	bucketName := viper.GetString("oss.bucketName")
 	//获取保存的目录名
 	pathToSave := filepath.ToSlash(fileStore.GetDefaultPath(getOSSUploadTokeRequest.FileName))
 
