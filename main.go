@@ -47,6 +47,13 @@ func main() {
 
 	r.Use(ginHelper.ErrHandler())
 
+	//各种中间件调用顺序不能变
+	//根据需求开关验证逻辑，如果需要postman测试 接口的话，建议关闭此选项
+	if viper.GetBool("auth_middleware") {
+		//初始化验证
+		r.Use(ginHelper.AuthenticationMiddleware(CommonCheckTokenHandler))
+	}
+
 	//gin的格式化参数
 	//初始化access_log
 	r.Use(myLogger.GetGinAccessFileLogger(viper.GetString("log.access_log_file_path"), viper.GetString("app_name")+"_"+viper.GetString("log.access_log_file_name")))
@@ -83,12 +90,6 @@ func main() {
 	userRpc.InitUserClient(viper.GetString("sso_host"))
 
 	fmt.Printf("init userClientSuccess")
-
-	//根据需求开关验证逻辑，如果需要postman测试 接口的话，建议关闭此选项
-	if viper.GetBool("auth_middleware") {
-		//初始化验证
-		r.Use(ginHelper.AuthenticationMiddleware(CommonCheckTokenHandler))
-	}
 
 	fmt.Printf(viper.GetString("app_port"))
 

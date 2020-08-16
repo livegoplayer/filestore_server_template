@@ -11,7 +11,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16 // indirect
 	github.com/lestrrat-go/strftime v1.0.3 // indirect
 	github.com/livegoplayer/go_db_helper v1.0.1
-	github.com/livegoplayer/go_gin_helper v1.0.16
+	github.com/livegoplayer/go_gin_helper v1.0.17
 	github.com/livegoplayer/go_helper v1.0.43
 	github.com/livegoplayer/go_logger v1.0.13
 	github.com/livegoplayer/go_user_rpc v1.0.34

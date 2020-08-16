@@ -78,16 +78,10 @@ func CommonCheckTokenHandler(c *gin.Context) {
 	//获取token，如果没有就设置
 	token, err := c.Cookie("us_user_cookie")
 	if token == "" {
-		token = c.Request.FormValue("token")
-		if token == "" {
-			ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
-		}
-		//设置一下cookie
-		c.SetCookie("us_user_cookie", token, int(time.Hour.Seconds()*6), "/", "", false, false)
+		ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
 	}
 
 	//如果没有token，证明没有登录
-	data := &checkUserStatusRes{}
 	checkUserStatusRequest := &userpb.CheckUserStatusRequest{}
 	checkUserStatusRequest.Token = token
 
@@ -106,7 +100,4 @@ func CommonCheckTokenHandler(c *gin.Context) {
 	if res.GetData().IsLogin == false {
 		ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
 	}
-	data.UserSession = res.GetData().UserSession
-	data.IsLogin = res.GetData().IsLogin
-	data.Token = res.GetData().Token
 }
