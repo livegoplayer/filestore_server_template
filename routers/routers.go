@@ -2,29 +2,39 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	ginHelper "github.com/livegoplayer/go_gin_helper"
 
 	. "github.com/livegoplayer/filestore-server/controller"
 )
 
-func InitAppRouter(r gin.IRoutes) {
-	// 设置一个get请求的路由，url为/ping, 处理函数（或者叫控制器函数）是一个闭包函数。
-	r.POST("/api/file/upload", UpLoadHandler)
-	r.GET("/api/file/test", TestHandler)
+func InitAppRouter(r *gin.Engine) {
 
-	r.POST("/api/user/checkToken", CheckTokenHandler)
-	r.POST("/api/user/logout", LogoutHandler)
+	userGroup := r.Group("/api/user")
+	{
+		userGroup.POST("/checkToken", CheckTokenHandler)
+		userGroup.GET("/logout", LogoutHandler)
+	}
 
-	//获取文件列表
-	r.GET("/api/file/getFileList", GetFileListHandler)
-	r.GET("/api/file/getPathList", GetUserPathListHandler)
-	r.GET("/api/file/getChildPathList", GetUserChildPathListHandler)
-	r.POST("/api/file/saveUserPath", SaveUserPathHandler)
-	r.POST("/api/file/batchDelUserPath", BatchDelUserPathHandler)
-	r.POST("/api/file/batchDelUserFile", BatchDelUserFileHandler)
-	r.POST("/api/file/batchMoveUserFile", BatchMoveUserFileHandler)
-	r.POST("/api/file/batchMoveUserPath", BatchMoveUserPathHandler)
+	//各种中间件调用顺序不能变
+	//根据需求开关验证逻辑，如果需要postman测试 接口的话，建议关闭此选项
+	fileGroup := r.Group("/api/file", ginHelper.AuthenticationMiddleware(CommonCheckTokenHandler))
+	{
+		// 设置一个get请求的路由，url为/ping, 处理函数（或者叫控制器函数）是一个闭包函数。
+		fileGroup.POST("/upload", UpLoadHandler)
+		fileGroup.GET("/test", TestHandler)
 
-	//oss客户端直传相关逻辑
-	r.POST("/api/file/getUploadToken", GetOSSUploadTokenHandler)
-	r.POST("/api/file/ossUploadSuccessCallback", OSSUploadSuccessCallbackHandler)
+		//获取文件列表
+		fileGroup.GET("/getFileList", GetFileListHandler)
+		fileGroup.GET("/getPathList", GetUserPathListHandler)
+		fileGroup.GET("/getChildPathList", GetUserChildPathListHandler)
+		fileGroup.POST("/saveUserPath", SaveUserPathHandler)
+		fileGroup.POST("/batchDelUserPath", BatchDelUserPathHandler)
+		fileGroup.POST("/batchDelUserFile", BatchDelUserFileHandler)
+		fileGroup.POST("/batchMoveUserFile", BatchMoveUserFileHandler)
+		fileGroup.POST("/batchMoveUserPath", BatchMoveUserPathHandler)
+
+		//oss客户端直传相关逻辑
+		fileGroup.POST("/api/file/getUploadToken", GetOSSUploadTokenHandler)
+		fileGroup.POST("/api/file/ossUploadSuccessCallback", OSSUploadSuccessCallbackHandler)
+	}
 }

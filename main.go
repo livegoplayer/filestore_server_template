@@ -13,8 +13,6 @@ import (
 	"github.com/livegoplayer/filestore-server/fileStore"
 	. "github.com/livegoplayer/filestore-server/routers"
 
-	. "github.com/livegoplayer/filestore-server/controller"
-
 	dbHelper "github.com/livegoplayer/go_db_helper"
 	ginHelper "github.com/livegoplayer/go_gin_helper"
 	. "github.com/livegoplayer/go_helper"
@@ -47,12 +45,7 @@ func main() {
 
 	r.Use(ginHelper.ErrHandler())
 
-	//各种中间件调用顺序不能变
-	//根据需求开关验证逻辑，如果需要postman测试 接口的话，建议关闭此选项
-	if viper.GetBool("auth_middleware") {
-		//初始化验证
-		r.Use(ginHelper.AuthenticationMiddleware(CommonCheckTokenHandler))
-	}
+	InitAppRouter(r)
 
 	//gin的格式化参数
 	//初始化access_log
@@ -84,8 +77,6 @@ func main() {
 
 	//更换校验器
 	binding.Validator = ValidatorV10
-
-	InitAppRouter(r)
 
 	userRpc.InitUserClient(viper.GetString("sso_host"))
 
