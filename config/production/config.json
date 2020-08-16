@@ -3,7 +3,8 @@
   "client_list" : [
     "http://www.52db.xyz",
     "http://www.52db.work",
-    "http:127.0.0.1"
+    "http:127.0.0.1",
+    "http://gofilestore.oss-cn-shanghai.aliyuncs.com"
   ],
 
   "app_name" : "file_store",
