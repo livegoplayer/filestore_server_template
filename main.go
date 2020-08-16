@@ -33,7 +33,7 @@ func main() {
 	//设置gin的运行模式
 	switch viper.GetString("ENV") {
 	case PRODUCTION_ENV:
-		gin.SetMode(gin.ReleaseMode)
+		gin.SetMode(gin.DebugMode)
 	case DEVELOPMENT_ENV:
 		gin.SetMode(gin.DebugMode)
 		//额外放置一个可以在控制台打印access_log的中间件
