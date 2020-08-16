@@ -1,9 +1,11 @@
 package controller
 
 import (
+	"crypto/md5"
 	"net/url"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -191,6 +193,7 @@ type GetOSSUploadTokeRequest struct {
 	FileSha1 string `form:"file_sha1" validate:"required" json:"file_sha1"`
 	Uid      int    `form:"uid" validate:"required" json:"uid"`
 	PathId   int    `form:"path_id" json:"path_id"`
+	FileSize int64  `form:"file_size" validate:"required" json:"file_size"`
 }
 
 //获取oss客户端直传的配置
@@ -223,14 +226,20 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	callbackParam := fileStore.CallbackParam{
 		CallbackUrl: viper.GetString("app_host") + "/api/file/ossUploadSuccessCallback",
 	}
+
+	md5Time := md5.Sum([]byte(strconv.Itoa(int(time.Now().Unix()))))
+	fileExt := myHelper.GetFileExtName(getOSSUploadTokeRequest.FileName)
+	realFileName := myHelper.Substring(getOSSUploadTokeRequest.FileName, 0, strings.LastIndex(getOSSUploadTokeRequest.FileName, "."))
+	fileSsoName := realFileName + string(md5Time[:]) + fileExt
+
 	v := url.Values{}
 	v.Add("bucket_name", bucketName)
-	v.Add("file_sso_name", "${object}")
+	v.Add("file_sso_name", fileSsoName)
 	v.Add("file_name", getOSSUploadTokeRequest.FileName)
 	v.Add("file_sha1", getOSSUploadTokeRequest.FileSha1)
 	v.Add("uid", strconv.Itoa(getOSSUploadTokeRequest.Uid))
 	v.Add("path_id", strconv.Itoa(getOSSUploadTokeRequest.PathId))
-	v.Add("file_size", "${size}")
+	v.Add("file_size", strconv.Itoa(int(getOSSUploadTokeRequest.FileSize)))
 	v.Add("file_path", pathToSave)
 
 	//callbackParam.CallbackBody = "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}"
