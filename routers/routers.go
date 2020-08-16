@@ -34,7 +34,7 @@ func InitAppRouter(r *gin.Engine) {
 		fileGroup.POST("/batchMoveUserPath", BatchMoveUserPathHandler)
 
 		//oss客户端直传相关逻辑
-		fileGroup.POST("/api/file/getUploadToken", GetOSSUploadTokenHandler)
-		fileGroup.POST("/api/file/ossUploadSuccessCallback", OSSUploadSuccessCallbackHandler)
+		fileGroup.POST("/getUploadToken", GetOSSUploadTokenHandler)
+		fileGroup.POST("/ossUploadSuccessCallback", OSSUploadSuccessCallbackHandler)
 	}
 }
