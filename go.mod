@@ -13,7 +13,7 @@ require (
 	github.com/livegoplayer/go_db_helper v1.0.1
 	github.com/livegoplayer/go_gin_helper v1.0.17
 	github.com/livegoplayer/go_helper v1.0.43
-	github.com/livegoplayer/go_logger v1.0.13
+	github.com/livegoplayer/go_logger v1.0.14
 	github.com/livegoplayer/go_user_rpc v1.0.34
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
 	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
@@ -27,5 +27,5 @@ require (
 	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
 	google.golang.org/genproto v0.0.0-20200815001618-f69a88009b70 // indirect
 	google.golang.org/grpc v1.31.0 // indirect
-	gopkg.in/ini.v1 v1.58.0 // indirect
+	gopkg.in/ini.v1 v1.60.0 // indirect
 )
