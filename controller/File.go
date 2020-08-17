@@ -226,7 +226,8 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	}
 
 	callbackParam := fileStore.CallbackParam{
-		CallbackUrl: viper.GetString("app_host") + "/api/file/ossUploadSuccessCallback",
+		CallbackUrl:      viper.GetString("app_host") + "/api/file/ossUploadSuccessCallback",
+		CallbackBodyType: "application/x-www-form-urlencoded",
 	}
 
 	md5Time := md5.Sum([]byte(strconv.Itoa(int(time.Now().Unix()))))
