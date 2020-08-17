@@ -301,6 +301,8 @@ github.com/livegoplayer/go_logger v1.0.13 h1:bDsJlsBNduI44BPLnh3bsWCVu2XqsnLGizR
 github.com/livegoplayer/go_logger v1.0.13/go.mod h1:w6Cv+hxj6rHeUYEQi6ijKThGs1F6JXAr2Ze3Ei/EsgM=
 github.com/livegoplayer/go_logger v1.0.14 h1:tjwPJSMNqri1IkAkTLYRcDrE4X0p3oPVn9gkM/UKbAw=
 github.com/livegoplayer/go_logger v1.0.14/go.mod h1:w6Cv+hxj6rHeUYEQi6ijKThGs1F6JXAr2Ze3Ei/EsgM=
+github.com/livegoplayer/go_logger v1.0.15 h1:FG5G4kWOsAVGEKrQHiuF4gYDCCRzenzyutzgg2BT2U0=
+github.com/livegoplayer/go_logger v1.0.15/go.mod h1:w6Cv+hxj6rHeUYEQi6ijKThGs1F6JXAr2Ze3Ei/EsgM=
 github.com/livegoplayer/go_redis_helper v1.0.1 h1:YMlQJDcgWzGtGHzp0Hu4k53OxKBxSzbULECAFdp27j0=
 github.com/livegoplayer/go_redis_helper v1.0.1/go.mod h1:sl3wasjvOSnl8Gpzf1BDl5OBrAylGcMkVzry+GkYZyc=
 github.com/livegoplayer/go_redis_helper v1.0.2 h1:KswVSIjgH6AZp9+oMdPTdaFMefMlJSsdiwagN9BHahc=

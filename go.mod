@@ -13,7 +13,7 @@ require (
 	github.com/livegoplayer/go_db_helper v1.0.1
 	github.com/livegoplayer/go_gin_helper v1.0.17
 	github.com/livegoplayer/go_helper v1.0.43
-	github.com/livegoplayer/go_logger v1.0.14
+	github.com/livegoplayer/go_logger v1.0.15
 	github.com/livegoplayer/go_user_rpc v1.0.34
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
 	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
