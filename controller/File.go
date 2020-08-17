@@ -286,7 +286,7 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		request := &OSSUploadSuccessCallbackHandlerRequest{}
 		err = c.Bind(request)
 		myLogger.Info(err)
-		myLogger.Info(request)
+		myLogger.Info(*request)
 
 		ginHelper.CheckError(err)
 
