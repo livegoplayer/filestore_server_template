@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	myHelper "github.com/livegoplayer/go_helper"
+	myLogger "github.com/livegoplayer/go_logger"
 	"github.com/spf13/viper"
 
 	"github.com/livegoplayer/filestore-server/fileStore"
@@ -280,6 +281,9 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		// 这里存放callback代码
 		request := &OSSUploadSuccessCallbackHandlerRequest{}
 		err = c.Bind(request)
+		myLogger.Info(err)
+		myLogger.Info(request)
+
 		ginHelper.CheckError(err)
 
 		id := fileStore.AddOSSFileToUser(request.BucketName, request.FileOSSName, request.FileName, request.FileOSSPath, request.FileSha1, request.Uid, request.PathId, request.FileSize)
