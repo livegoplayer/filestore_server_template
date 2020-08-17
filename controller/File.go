@@ -301,6 +301,8 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		//} else if c.Request.Header.Get("content-type") == "text/plain" {
 		content, _ := ioutil.ReadAll(c.Request.Body)
 		urlMap, err := url.ParseQuery(string(content))
+		myLogger.Info(content)
+		myLogger.Info(urlMap)
 		ginHelper.CheckError(err)
 		request.BucketName = strings.Join(urlMap["bucket_name"], "")
 		request.FileOSSName = strings.Join(urlMap["file_sso_name"], "")
