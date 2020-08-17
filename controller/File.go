@@ -295,7 +295,7 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		request.PathId, _ = strconv.Atoi(strings.Join(urlMap["path_id"], ""))
 		fileSize, _ := strconv.Atoi(strings.Join(urlMap["file_size"], ""))
 		request.FileSize = int64(fileSize)
-		myLogger.Info(request)
+		myLogger.Info(*request)
 
 		id := fileStore.AddOSSFileToUser(request.BucketName, request.FileOSSName, request.FileName, request.FileOSSPath, request.FileSha1, request.Uid, request.PathId, request.FileSize)
 
