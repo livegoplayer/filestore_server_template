@@ -2,7 +2,6 @@ package controller
 
 import (
 	"crypto/md5"
-	"encoding/json"
 	"io/ioutil"
 	"net/url"
 	"path/filepath"
@@ -235,30 +234,30 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	realFileName := myHelper.Substring(getOSSUploadTokeRequest.FileName, 0, strings.LastIndex(getOSSUploadTokeRequest.FileName, "."))
 	fileSsoName := realFileName + string(md5Time[:]) + "." + fileExt
 
-	//v := url.Values{}
-	//v.Add("bucket_name", bucketName)
-	//v.Add("file_sso_name", fileSsoName)
-	//v.Add("file_name", getOSSUploadTokeRequest.FileName)
-	//v.Add("file_sha1", getOSSUploadTokeRequest.FileSha1)
-	//v.Add("uid", strconv.Itoa(getOSSUploadTokeRequest.Uid))
-	//v.Add("path_id", strconv.Itoa(getOSSUploadTokeRequest.PathId))
-	//v.Add("file_size", strconv.Itoa(int(getOSSUploadTokeRequest.FileSize)))
-	//v.Add("file_path", pathToSave)
-	v := &OSSUploadSuccessCallbackHandlerRequest{
-		BucketName:  bucketName,
-		FileOSSName: fileSsoName,
-		FileName:    getOSSUploadTokeRequest.FileName,
-		FileSha1:    getOSSUploadTokeRequest.FileSha1,
-		Uid:         getOSSUploadTokeRequest.Uid,
-		PathId:      getOSSUploadTokeRequest.PathId,
-		FileSize:    getOSSUploadTokeRequest.FileSize,
-		FileOSSPath: pathToSave,
-	}
+	v := url.Values{}
+	v.Add("bucket_name", bucketName)
+	v.Add("file_sso_name", fileSsoName)
+	v.Add("file_name", getOSSUploadTokeRequest.FileName)
+	v.Add("file_sha1", getOSSUploadTokeRequest.FileSha1)
+	v.Add("uid", strconv.Itoa(getOSSUploadTokeRequest.Uid))
+	v.Add("path_id", strconv.Itoa(getOSSUploadTokeRequest.PathId))
+	v.Add("file_size", strconv.Itoa(int(getOSSUploadTokeRequest.FileSize)))
+	v.Add("file_path", pathToSave)
+	//v := &OSSUploadSuccessCallbackHandlerRequest{
+	//	BucketName:  bucketName,
+	//	FileOSSName: fileSsoName,
+	//	FileName:    getOSSUploadTokeRequest.FileName,
+	//	FileSha1:    getOSSUploadTokeRequest.FileSha1,
+	//	Uid:         getOSSUploadTokeRequest.Uid,
+	//	PathId:      getOSSUploadTokeRequest.PathId,
+	//	FileSize:    getOSSUploadTokeRequest.FileSize,
+	//	FileOSSPath: pathToSave,
+	//}
 
 	//callbackParam.CallbackBody = "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}"
-	//callbackParam.CallbackBody = v.Encode()
-	callbackBody, err := json.Marshal(v)
-	callbackParam.CallbackBody = string(callbackBody)
+	callbackParam.CallbackBody = v.Encode()
+	//callbackBody, err := json.Marshal(v)
+	//callbackParam.CallbackBody = string(callbackBody)
 
 	token := fileStore.GetPolicyToken(int64(time.Minute*5/time.Millisecond), pathToSave, callbackParam, viper.GetString("oss.bucketName"))
 
