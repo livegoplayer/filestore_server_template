@@ -42,7 +42,6 @@ func CheckTokenHandler(c *gin.Context) {
 		if gin.IsDebugging() {
 			ginHelper.CheckError(err)
 		} else {
-			myLogger.Error("获取用户鉴权失败" + err.Error())
 			ginHelper.AuthResp("没有权限，请先登录", viper.GetString("user_app_host"))
 		}
 	}

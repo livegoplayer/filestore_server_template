@@ -11,7 +11,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	myHelper "github.com/livegoplayer/go_helper"
-	myLogger "github.com/livegoplayer/go_logger"
 	"github.com/spf13/viper"
 
 	"github.com/livegoplayer/filestore-server/fileStore"
@@ -269,19 +268,15 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 	// Get PublicKey bytes
 	bytePublicKey, err := fileStore.GetPublicKey(c.Request)
 	ginHelper.CheckError(err)
-	myLogger.Info(err)
 
 	// Get Authorization bytes : decode from Base64String
 	byteAuthorization, err := fileStore.GetAuthorization(c.Request)
 	ginHelper.CheckError(err)
 
-	myLogger.Info(err)
-
 	// Get MD5 bytes from Newly Constructed Authrization String.
 	byteMD5, err := fileStore.GetMD5FromNewAuthString(c.Request)
 	ginHelper.CheckError(err)
 
-	myLogger.Info(err)
 	// verifySignature and response to client
 	if fileStore.VerifySignature(bytePublicKey, byteMD5, byteAuthorization) {
 		// 这里存放callback代码
@@ -299,7 +294,6 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		request.PathId, _ = strconv.Atoi(strings.Join(urlMap["path_id"], ""))
 		fileSize, _ := strconv.Atoi(strings.Join(urlMap["file_size"], ""))
 		request.FileSize = int64(fileSize)
-		myLogger.Info(*request)
 
 		id := fileStore.AddOSSFileToUser(request.BucketName, request.FileOSSName, request.FileName, request.FileOSSPath, request.FileSha1, request.Uid, request.PathId, request.FileSize)
 
