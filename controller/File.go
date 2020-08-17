@@ -227,8 +227,7 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	}
 
 	callbackParam := fileStore.CallbackParam{
-		CallbackUrl:      viper.GetString("app_host") + "/api/file/ossUploadSuccessCallback",
-		CallbackBodyType: "application/x-www-form-urlencoded",
+		CallbackUrl: viper.GetString("app_host") + "/api/file/ossUploadSuccessCallback",
 	}
 
 	md5Time := md5.Sum([]byte(strconv.Itoa(int(time.Now().Unix()))))
@@ -236,15 +235,25 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	realFileName := myHelper.Substring(getOSSUploadTokeRequest.FileName, 0, strings.LastIndex(getOSSUploadTokeRequest.FileName, "."))
 	fileSsoName := realFileName + string(md5Time[:]) + "." + fileExt
 
-	v := url.Values{}
-	v.Add("bucket_name", bucketName)
-	v.Add("file_sso_name", fileSsoName)
-	v.Add("file_name", getOSSUploadTokeRequest.FileName)
-	v.Add("file_sha1", getOSSUploadTokeRequest.FileSha1)
-	v.Add("uid", strconv.Itoa(getOSSUploadTokeRequest.Uid))
-	v.Add("path_id", strconv.Itoa(getOSSUploadTokeRequest.PathId))
-	v.Add("file_size", strconv.Itoa(int(getOSSUploadTokeRequest.FileSize)))
-	v.Add("file_path", pathToSave)
+	//v := url.Values{}
+	//v.Add("bucket_name", bucketName)
+	//v.Add("file_sso_name", fileSsoName)
+	//v.Add("file_name", getOSSUploadTokeRequest.FileName)
+	//v.Add("file_sha1", getOSSUploadTokeRequest.FileSha1)
+	//v.Add("uid", strconv.Itoa(getOSSUploadTokeRequest.Uid))
+	//v.Add("path_id", strconv.Itoa(getOSSUploadTokeRequest.PathId))
+	//v.Add("file_size", strconv.Itoa(int(getOSSUploadTokeRequest.FileSize)))
+	//v.Add("file_path", pathToSave)
+	v := &OSSUploadSuccessCallbackHandlerRequest{
+		BucketName:  bucketName,
+		FileOSSName: fileSsoName,
+		FileName:    getOSSUploadTokeRequest.FileName,
+		FileSha1:    getOSSUploadTokeRequest.FileSha1,
+		Uid:         getOSSUploadTokeRequest.Uid,
+		PathId:      getOSSUploadTokeRequest.PathId,
+		FileSize:    getOSSUploadTokeRequest.FileSize,
+		FileOSSPath: pathToSave,
+	}
 
 	//callbackParam.CallbackBody = "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}"
 	//callbackParam.CallbackBody = v.Encode()
