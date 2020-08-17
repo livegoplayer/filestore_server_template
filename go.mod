@@ -8,6 +8,7 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/google/go-querystring v1.0.0
 	github.com/jinzhu/gorm v1.9.16 // indirect
 	github.com/lestrrat-go/strftime v1.0.3 // indirect
 	github.com/livegoplayer/go_db_helper v1.0.1
@@ -16,11 +17,10 @@ require (
 	github.com/livegoplayer/go_logger v1.0.15
 	github.com/livegoplayer/go_user_rpc v1.0.34
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
-	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
+	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/afero v1.3.4 // indirect
 	github.com/spf13/viper v1.7.1
-	github.com/stretchr/objx v0.1.1 // indirect
 	golang.org/x/image v0.0.0-20200801110659-972c09e46d76 // indirect
 	golang.org/x/net v0.0.0-20200813134508-3edf25e44fcc // indirect
 	golang.org/x/sys v0.0.0-20200814200057-3d37ad5750ed // indirect

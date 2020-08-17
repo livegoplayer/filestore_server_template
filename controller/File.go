@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"io/ioutil"
 	"net/url"
 	"path/filepath"
 	"strconv"
@@ -284,11 +285,20 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 	if fileStore.VerifySignature(bytePublicKey, byteMD5, byteAuthorization) {
 		// 这里存放callback代码
 		request := &OSSUploadSuccessCallbackHandlerRequest{}
-		err = c.Bind(request)
-		myLogger.Info(err)
-		myLogger.Info(*request)
+		content, _ := ioutil.ReadAll(c.Request.Body)
 
+		urlMap, err := url.ParseQuery(string(content))
 		ginHelper.CheckError(err)
+		request.BucketName = strings.Join(urlMap["bucket_name"], "")
+		request.FileOSSName = strings.Join(urlMap["file_sso_name"], "")
+		request.FileName = strings.Join(urlMap["file_name"], "")
+		request.FileOSSPath = strings.Join(urlMap["file_path"], "")
+		request.FileSha1 = strings.Join(urlMap["file_sha1"], "")
+		request.Uid, _ = strconv.Atoi(strings.Join(urlMap["uid"], ""))
+		request.PathId, _ = strconv.Atoi(strings.Join(urlMap["path_id"], ""))
+		fileSize, _ := strconv.Atoi(strings.Join(urlMap["file_size"], ""))
+		request.FileSize = int64(fileSize)
+		myLogger.Info(*request)
 
 		id := fileStore.AddOSSFileToUser(request.BucketName, request.FileOSSName, request.FileName, request.FileOSSPath, request.FileSha1, request.Uid, request.PathId, request.FileSize)
 
