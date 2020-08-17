@@ -298,6 +298,7 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 	if fileStore.VerifySignature(bytePublicKey, byteMD5, byteAuthorization) {
 		// 这里存放callback代码
 		request := &OSSUploadSuccessCallbackHandlerRequest{}
+		myLogger.Info(c.Request.Header.Get("content-type"))
 		if c.Request.Header.Get("content-type") == "application/json" || c.Request.Header.Get("content-type") == "application/json" {
 			err := c.Bind(request)
 			ginHelper.CheckError(err)
