@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"crypto/md5"
 	"net/url"
 	"path/filepath"
 	"strconv"
@@ -227,10 +226,10 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 		CallbackUrl: viper.GetString("app_host") + "/api/file/ossUploadSuccessCallback",
 	}
 
-	md5Time := md5.Sum([]byte(strconv.Itoa(int(time.Now().Unix()))))
+	md5Time := strconv.Itoa(int(time.Now().Unix()))
 	fileExt := myHelper.GetFileExtName(getOSSUploadTokeRequest.FileName)
 	realFileName := myHelper.Substring(getOSSUploadTokeRequest.FileName, 0, strings.LastIndex(getOSSUploadTokeRequest.FileName, "."))
-	fileSsoName := realFileName + string(md5Time[:]) + fileExt
+	fileSsoName := realFileName + md5Time[:] + "." + fileExt
 
 	v := url.Values{}
 	v.Add("bucket_name", bucketName)
