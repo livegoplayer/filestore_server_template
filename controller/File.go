@@ -2,6 +2,7 @@ package controller
 
 import (
 	"crypto/md5"
+	"encoding/json"
 	"io/ioutil"
 	"net/url"
 	"path/filepath"
@@ -246,7 +247,10 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	v.Add("file_path", pathToSave)
 
 	//callbackParam.CallbackBody = "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}"
-	callbackParam.CallbackBody = v.Encode()
+	//callbackParam.CallbackBody = v.Encode()
+	callbackBody, err := json.Marshal(v)
+	callbackParam.CallbackBody = string(callbackBody)
+
 	token := fileStore.GetPolicyToken(int64(time.Minute*5/time.Millisecond), pathToSave, callbackParam, viper.GetString("oss.bucketName"))
 
 	data["token"] = token
