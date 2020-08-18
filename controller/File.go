@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	myHelper "github.com/livegoplayer/go_helper"
+	myLogger "github.com/livegoplayer/go_logger"
 	"github.com/spf13/viper"
 
 	"github.com/livegoplayer/filestore-server/fileStore"
@@ -255,6 +256,7 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	callbackParam.CallbackBody = v.Encode()
 	//callbackBody, err := json.Marshal(v)
 	//callbackParam.CallbackBody = string(callbackBody)
+	myLogger.Info(callbackParam)
 
 	token := fileStore.GetPolicyToken(int64(time.Minute*5/time.Millisecond), pathToSave, callbackParam, viper.GetString("oss.bucketName"))
 
