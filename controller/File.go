@@ -227,7 +227,7 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 		CallbackUrl: viper.GetString("app_host") + "/api/file/ossUploadSuccessCallback",
 	}
 
-	md5Time := strconv.Itoa(int(time.Now().Unix()))
+	md5Time := strconv.FormatInt(time.Now().Unix(), 10)
 	fileExt := myHelper.GetFileExtName(getOSSUploadTokeRequest.FileName)
 	realFileName := myHelper.Substring(getOSSUploadTokeRequest.FileName, 0, strings.LastIndex(getOSSUploadTokeRequest.FileName, "."))
 	fileSsoName := realFileName + md5Time + "." + fileExt
