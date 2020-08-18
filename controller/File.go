@@ -295,6 +295,9 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 	if fileStore.VerifySignature(bytePublicKey, byteMD5, byteAuthorization) {
 		// 这里存放callback代码
 		request := &OSSUploadSuccessCallbackHandlerRequest{}
+		err = c.Bind(request)
+		myLogger.Info(*request)
+		ginHelper.CheckError(err)
 		content, _ := ioutil.ReadAll(c.Request.Body)
 		urlMap, err := url.ParseQuery(string(content))
 		myLogger.Info(content)
