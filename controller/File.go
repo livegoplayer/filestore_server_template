@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	myHelper "github.com/livegoplayer/go_helper"
+	myLogger "github.com/livegoplayer/go_logger"
 	"github.com/spf13/viper"
 
 	"github.com/livegoplayer/filestore-server/fileStore"
@@ -296,8 +297,8 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		request := &OSSUploadSuccessCallbackHandlerRequest{}
 		content, _ := ioutil.ReadAll(c.Request.Body)
 		urlMap, err := url.ParseQuery(string(content))
-		//myLogger.Info(content)
-		//myLogger.Info(urlMap)
+		myLogger.Info(content)
+		myLogger.Info(urlMap)
 		ginHelper.CheckError(err)
 		request.BucketName = strings.Join(urlMap["bucket_name"], "")
 		request.FileOSSName = strings.Join(urlMap["file_sso_name"], "")
@@ -309,7 +310,7 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		fileSize, _ := strconv.Atoi(strings.Join(urlMap["file_size"], ""))
 		request.FileSize = int64(fileSize)
 		//}
-		//myLogger.Info(*request)
+		myLogger.Info(*request)
 
 		id := fileStore.AddOSSFileToUser(request.BucketName, request.FileOSSName, request.FileName, request.FileOSSPath, request.FileSha1, request.Uid, request.PathId, request.FileSize)
 
