@@ -492,21 +492,21 @@ func GetAuthorization(r *http.Request) ([]byte, error) {
 }
 
 // getMD5FromNewAuthString : Get MD5 bytes from Newly Constructed Authrization String.
-func GetMD5FromNewAuthString(r *http.Request) ([]byte, error) {
+func GetMD5FromNewAuthString(r *http.Request) ([]byte, string, error) {
 	var byteMD5 []byte
 	// Construct the New Auth String from URI+Query+Body
 	bodyContent, err := ioutil.ReadAll(r.Body)
 	r.Body.Close()
 	if err != nil {
 		fmt.Printf("Read Request Body failed : %s \n", err.Error())
-		return byteMD5, err
+		return byteMD5, "", err
 	}
 	strCallbackBody := string(bodyContent)
 	// fmt.Printf("r.URL.RawPath={%s}, r.URL.Query()={%s}, strCallbackBody={%s}\n", r.URL.RawPath, r.URL.Query(), strCallbackBody)
 	strURLPathDecode, errUnescape := UnescapePath(r.URL.Path, encodePathSegment) //url.PathUnescape(r.URL.Path) for Golang v1.8.2+
 	if errUnescape != nil {
 		fmt.Printf("url.PathUnescape failed : URL.Path=%s, error=%s \n", r.URL.Path, err.Error())
-		return byteMD5, errUnescape
+		return byteMD5, "", errUnescape
 	}
 
 	// Generate New Auth String prepare for MD5
@@ -523,7 +523,7 @@ func GetMD5FromNewAuthString(r *http.Request) ([]byte, error) {
 	md5Ctx.Write([]byte(strAuth))
 	byteMD5 = md5Ctx.Sum(nil)
 
-	return byteMD5, nil
+	return byteMD5, strCallbackBody, nil
 }
 
 /*  VerifySignature
