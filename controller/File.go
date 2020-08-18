@@ -229,7 +229,7 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	md5Time := strconv.Itoa(int(time.Now().Unix()))
 	fileExt := myHelper.GetFileExtName(getOSSUploadTokeRequest.FileName)
 	realFileName := myHelper.Substring(getOSSUploadTokeRequest.FileName, 0, strings.LastIndex(getOSSUploadTokeRequest.FileName, "."))
-	fileSsoName := realFileName + md5Time[:] + "." + fileExt
+	fileSsoName := realFileName + md5Time + "." + fileExt
 
 	v := url.Values{}
 	v.Add("bucket_name", bucketName)
