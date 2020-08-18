@@ -2,7 +2,6 @@ package controller
 
 import (
 	"crypto/md5"
-	"io/ioutil"
 	"net/url"
 	"path/filepath"
 	"strconv"
@@ -11,7 +10,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	myHelper "github.com/livegoplayer/go_helper"
-	myLogger "github.com/livegoplayer/go_logger"
 	"github.com/spf13/viper"
 
 	"github.com/livegoplayer/filestore-server/fileStore"
@@ -291,29 +289,12 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 	byteMD5, err := fileStore.GetMD5FromNewAuthString(c.Request)
 	ginHelper.CheckError(err)
 
-	// verifySignature and response to client
+	//verifySignature and response to client
 	if fileStore.VerifySignature(bytePublicKey, byteMD5, byteAuthorization) {
 		// 这里存放callback代码
 		request := &OSSUploadSuccessCallbackHandlerRequest{}
-		err = c.Bind(request)
-		myLogger.Info(*request)
+		err := c.Bind(request)
 		ginHelper.CheckError(err)
-		content, _ := ioutil.ReadAll(c.Request.Body)
-		urlMap, err := url.ParseQuery(string(content))
-		myLogger.Info(content)
-		myLogger.Info(urlMap)
-		ginHelper.CheckError(err)
-		request.BucketName = strings.Join(urlMap["bucket_name"], "")
-		request.FileOSSName = strings.Join(urlMap["file_sso_name"], "")
-		request.FileName = strings.Join(urlMap["file_name"], "")
-		request.FileOSSPath = strings.Join(urlMap["file_path"], "")
-		request.FileSha1 = strings.Join(urlMap["file_sha1"], "")
-		request.Uid, _ = strconv.Atoi(strings.Join(urlMap["uid"], ""))
-		request.PathId, _ = strconv.Atoi(strings.Join(urlMap["path_id"], ""))
-		fileSize, _ := strconv.Atoi(strings.Join(urlMap["file_size"], ""))
-		request.FileSize = int64(fileSize)
-		//}
-		myLogger.Info(*request)
 
 		id := fileStore.AddOSSFileToUser(request.BucketName, request.FileOSSName, request.FileName, request.FileOSSPath, request.FileSha1, request.Uid, request.PathId, request.FileSize)
 
