@@ -339,7 +339,7 @@ func GetOssDownLoadUrlHandler(c *gin.Context) {
 	}
 
 	data := make(ResponseData)
-	data["down_load_url"] = downLoadUrl
+	data["download_url"] = downLoadUrl
 
 	ginHelper.SuccessResp("ok", data)
 }
