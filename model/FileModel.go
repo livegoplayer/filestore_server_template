@@ -213,15 +213,13 @@ func GetFileByUserFileId(id int) *File {
 
 	userFile := &RetUserFile{}
 	file := &File{}
-	db = db.Model(&RetUserFile{}).Where("id = ?", id)
 
-	if err := db.Find(&userFile).Error; err != nil {
+	if err := db.Model(&RetUserFile{}).Where("id = ?", id).Find(&userFile).Error; err != nil {
 		panic(err)
 	}
 
 	if userFile.FileId != 0 {
-		db = db.Model(&File{}).Where("id = ?", userFile.FileId)
-		if err := db.Find(&file).Error; err != nil {
+		if err := db.Model(&File{}).Where("id = ?", userFile.FileId).Find(&file).Error; err != nil {
 			panic(err)
 		}
 	}
