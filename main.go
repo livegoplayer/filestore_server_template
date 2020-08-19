@@ -75,6 +75,8 @@ func main() {
 	//oss上传
 	fileStore.InitOSSClient(viper.GetString("oss.accessKeyId"), viper.GetString("oss.accessKeySecret"), viper.GetString("oss.endpoint"))
 
+	//初始化本地上传位置
+	fileStore.InitFileDefaultPath(viper.GetString("app_file_path"))
 	//更换校验器
 	binding.Validator = ValidatorV10
 

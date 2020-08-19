@@ -207,3 +207,24 @@ func GetFileModelByFileMeta(fileSha1 string, path string, fileSize int64, fileSt
 
 	return nFile
 }
+
+func GetFileByUserFileId(id int) *File {
+	db := dbHelper.GetDB()
+
+	userFile := &RetUserFile{}
+	file := &File{}
+	db = db.Model(&RetUserFile{}).Where("id = ?", id)
+
+	if err := db.Find(&userFile).Error; err != nil {
+		panic(err)
+	}
+
+	if userFile.FileId != 0 {
+		db = db.Model(&File{}).Where("id = ?", userFile.FileId)
+		if err := db.Find(&file).Error; err != nil {
+			panic(err)
+		}
+	}
+
+	return file
+}

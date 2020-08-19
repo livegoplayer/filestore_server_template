@@ -27,6 +27,7 @@ import (
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	myHelper "github.com/livegoplayer/go_helper"
+	"github.com/spf13/viper"
 
 	"github.com/livegoplayer/filestore-server/model"
 )
@@ -42,6 +43,12 @@ func init() {
 var (
 	err error
 )
+
+var FILE_DEFAULT_PATH string
+
+func InitFileDefaultPath(fileDefaultPath string) {
+	FILE_DEFAULT_PATH = fileDefaultPath
+}
 
 //根据二进制文件保存文件
 func SaveFileToDir(file multipart.File, newFileName string, toPath string, fileSha1 string) (*FileMeta, error) {
@@ -182,9 +189,9 @@ func GetDefaultPath(fileName string) string {
 	ext := myHelper.GetFileExtName(fileName)
 	var Path string
 	if ext == "" {
-		Path = path.Join("./files/", "unknown", "/")
+		Path = path.Join(FILE_DEFAULT_PATH, "unknown", "/")
 	} else {
-		Path = path.Join("./files/", ext, "/")
+		Path = path.Join(FILE_DEFAULT_PATH, ext, "/")
 	}
 
 	defaultSavePath := myHelper.PathToCommon(Path)
@@ -215,6 +222,11 @@ func GetUserChildPathList(uid int, pid int, searchKey string) []model.UserPath {
 	return model.GetUserChildPathList(uid, pid, searchKey)
 }
 
+func GetFileMetaByUserFileId(id int) *model.File {
+	file := model.GetFileByUserFileId(id)
+	return file
+}
+
 //递归函数
 func GetChildPathIdList(pid int, list []model.UserPath, parentIdList []int) (idList []int) {
 	idList = []int{pid}
@@ -242,7 +254,7 @@ func GetChildPathIdList(pid int, list []model.UserPath, parentIdList []int) (idL
 
 }
 
-//根据file获取初始化好的FileMeta对象 todo 增加user file对象
+//根据file获取初始化好的FileMeta对象
 func GetFileMetaByFile(file *model.File) *FileMeta {
 	fileMeta := &FileMeta{}
 	fileMeta.FileSha1 = file.FileSha1
@@ -307,7 +319,7 @@ func UploadFileToOss(bucketName, objectName, localFileName string) {
 }
 
 //临时授权下载
-func GetDownloadUrl(bucketName, objectName string) string {
+func GetOssDownloadUrl(bucketName, objectName string) string {
 	// 获取存储空间。
 	bucket, err := ossClient.Bucket(bucketName)
 	if err != nil {
@@ -320,6 +332,12 @@ func GetDownloadUrl(bucketName, objectName string) string {
 	}
 
 	return signedURL
+}
+
+//临时基础url
+func GetBaseServerDownloadUrl(path string) string {
+	appPathUrl := viper.GetString("app_host") + viper.GetString("app_file_url_path")
+	return myHelper.PathToCommon(appPathUrl + path)
 }
 
 func PrepareForUpLoad(bucketName string, fileName string, pathToSave string) string {

@@ -10,6 +10,8 @@
   "app_name" : "file_store",
   "app_host" : "www.52db.xyz",
   "app_port" : "81",
+  "app_file_path" : "../files/",
+  "app_file_url_path" : "/files",
 
   "auth_middleware": true,
   "user_app_host" : "http://139.224.132.234/vue_user_pro/",

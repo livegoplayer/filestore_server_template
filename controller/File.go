@@ -22,6 +22,8 @@ type UpLoadRequest struct {
 	PathId int `form:"path_id" validate:"number"`
 }
 
+type ResponseData map[string]interface{}
+
 func UpLoadHandler(c *gin.Context) {
 	//如果是POST请求
 	//上传接口,接收文件信息流
@@ -307,13 +309,37 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 		id := fileStore.AddOSSFileToUser(request.BucketName, request.FileOSSName, request.FileName, request.FileOSSPath, request.FileSha1, request.Uid, request.PathId, request.FileSize)
 
 		if id > 0 {
-			data := make(map[string]interface{})
+			data := make(ResponseData)
 			data["new_id"] = id
-			ginHelper.SuccessResp("ok", data) // response OK : 200
+			ginHelper.SuccessResp("ok", data) // response Ooss.NewK : 200
 		} else {
 			ginHelper.ErrorResp(1, "保存失败")
 		}
 	} else {
 		ginHelper.ErrorResp(1, "验证失败") // response FAILED : 400
 	}
+}
+
+type GetOSSDownloadUrlHandlerRequest struct {
+	UserFileID int `form:"id" validate:"number" json:"id"`
+}
+
+func GetOssDownLoadUrlHandler(c *gin.Context) {
+	userFile := &GetOSSDownloadUrlHandlerRequest{}
+	err := c.BindQuery(userFile)
+	ginHelper.CheckError(err)
+
+	file := fileStore.GetFileMetaByUserFileId(userFile.UserFileID)
+
+	downLoadUrl := ""
+	if file.StoreType == 1 {
+		downLoadUrl = fileStore.GetOssDownloadUrl(file.BucketName, file.Path)
+	} else {
+		downLoadUrl = fileStore.GetBaseServerDownloadUrl(file.Path)
+	}
+
+	data := make(ResponseData)
+	data["down_load_url"] = downLoadUrl
+
+	ginHelper.SuccessResp("ok", data)
 }

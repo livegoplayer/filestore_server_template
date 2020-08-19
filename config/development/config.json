@@ -8,6 +8,8 @@
   "app_name" : "file_store",
   "app_host" : "testlocal.52db.xyz:9091",
   "app_port" : "9091",
+  "app_file_path" : "../files/",
+  "app_file_url_path" : "/files",
 
   "auth_middleware": true,
   "user_app_host" : "http://testlocal.52db.work:8080",

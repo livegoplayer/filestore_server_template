@@ -35,6 +35,8 @@ func InitAppRouter(r *gin.Engine) {
 
 		//oss客户端直传相关逻辑
 		fileGroup.POST("/getUploadToken", GetOSSUploadTokenHandler)
+		//获取文件下载连接的逻辑
+		fileGroup.GET("/getDownLoadUrl", GetOssDownLoadUrlHandler)
 	}
 	r.POST("/api/file/ossUploadSuccessCallback", OSSUploadSuccessCallbackHandler)
 }
