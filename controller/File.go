@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	myHelper "github.com/livegoplayer/go_helper"
+	myLogger "github.com/livegoplayer/go_logger"
 	"github.com/spf13/viper"
 
 	"github.com/livegoplayer/filestore-server/fileStore"
@@ -343,6 +344,8 @@ func GetOssDownLoadUrlHandler(c *gin.Context) {
 
 	data := make(ResponseData)
 	subUrl := myHelper.GetSubStringBetween(downLoadUrl, "http://"+file.BucketName+".oss-cn-shanghai.aliyuncs.com", "")
+	myLogger.Info("http://" + file.BucketName + ".oss-cn-shanghai.aliyuncs.com")
+	myLogger.Info(subUrl)
 	data["download_url"] = viper.GetString("file_host") + "/" + file.BucketName + subUrl
 
 	ginHelper.SuccessResp("ok", data)
