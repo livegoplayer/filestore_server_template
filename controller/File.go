@@ -342,7 +342,8 @@ func GetOssDownLoadUrlHandler(c *gin.Context) {
 	}
 
 	data := make(ResponseData)
-	data["download_url"] = viper.GetString("file_host") + "?real_url=" + downLoadUrl
+	subUrl := myHelper.GetSubStringBetween(downLoadUrl, "http://gofilestore.oss-cn-shanghai.aliyuncs.com", "")
+	data["download_url"] = viper.GetString("file_host") + subUrl
 
 	ginHelper.SuccessResp("ok", data)
 }
