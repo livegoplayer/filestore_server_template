@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"crypto/md5"
 	"net/url"
 	"path/filepath"
 	"strconv"
@@ -231,7 +232,8 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	md5Time := strconv.FormatInt(time.Now().Unix(), 10)
 	fileExt := myHelper.GetFileExtName(getOSSUploadTokeRequest.FileName)
 	realFileName := myHelper.Substring(getOSSUploadTokeRequest.FileName, 0, strings.LastIndex(getOSSUploadTokeRequest.FileName, "."))
-	fileSsoName := realFileName + md5Time + "." + fileExt
+	md5h := md5.Sum([]byte(realFileName + md5Time))
+	fileSsoName := string(md5h[:]) + "." + fileExt
 
 	v := url.Values{}
 	v.Add("bucket_name", bucketName)
