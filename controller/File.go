@@ -342,7 +342,7 @@ func GetOssDownLoadUrlHandler(c *gin.Context) {
 	}
 
 	data := make(ResponseData)
-	data["download_url"] = downLoadUrl
+	data["download_url"] = viper.GetString("file_host") + "?real_url=" + downLoadUrl
 
 	ginHelper.SuccessResp("ok", data)
 }

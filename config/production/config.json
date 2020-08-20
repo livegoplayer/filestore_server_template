@@ -15,6 +15,7 @@
 
   "auth_middleware": true,
   "user_app_host" : "http://139.224.132.234/vue_user_pro/",
+  "file_host" : "http://www.52db.xyz/forward",
 
   "log": {
     "access_log_file_path": "../log",
