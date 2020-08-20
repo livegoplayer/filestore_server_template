@@ -389,7 +389,7 @@ func PrepareForUpLoad(bucketName string, fileName string, pathToSave string) str
 }
 
 //获取临时授权token
-func GetPolicyToken(expireTime int64, uploadDir string, callbackParam CallbackParam, bucketName string) PolicyToken {
+func GetPolicyToken(expireTime int64, uploadDir string, callbackParam CallbackParam, bucketName string, filename string) PolicyToken {
 	now := time.Now().Unix()
 	expireEnd := now + expireTime
 	var tokenExpire = get_gmt_iso8601(expireEnd)
@@ -431,6 +431,7 @@ func GetPolicyToken(expireTime int64, uploadDir string, callbackParam CallbackPa
 	policyToken.Signature = string(signedStr)
 	policyToken.Directory = uploadDir
 	policyToken.Policy = string(debyte)
+	policyToken.Key = uploadDir + "/" + filename
 	policyToken.Callback = string(callbackBase64)
 
 	return policyToken
@@ -467,6 +468,7 @@ type PolicyToken struct {
 	Expire      int64  `json:"expire"`
 	Signature   string `json:"signature"`
 	Policy      string `json:"policy"`
+	Key         string `json:"key"`
 	Directory   string `json:"dir"`
 	Callback    string `json:"callback"`
 }

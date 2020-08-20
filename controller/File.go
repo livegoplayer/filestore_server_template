@@ -260,7 +260,7 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	//callbackBody, err := json.Marshal(v)
 	//callbackParam.CallbackBody = string(callbackBody)
 
-	token := fileStore.GetPolicyToken(int64(time.Minute*5/time.Millisecond), pathToSave, callbackParam, viper.GetString("oss.bucketName"))
+	token := fileStore.GetPolicyToken(int64(time.Minute*5/time.Millisecond), pathToSave, callbackParam, viper.GetString("oss.bucketName"), fileSsoName)
 
 	data["token"] = token
 	data["is_upload"] = isUpload
