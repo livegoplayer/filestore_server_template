@@ -211,9 +211,9 @@ func GetOSSDefaultPath(fileName string) string {
 	ext := myHelper.GetFileExtName(fileName)
 	var Path string
 	if ext == "" {
-		Path = path.Join("/files/", "unknown", "/")
+		Path = path.Join("files/", "unknown", "/")
 	} else {
-		Path = path.Join("/files/", ext, "/")
+		Path = path.Join("files/", ext, "/")
 	}
 
 	defaultSavePath := myHelper.PathToCommon(Path)
