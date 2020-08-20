@@ -206,7 +206,7 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 
 	bucketName := viper.GetString("oss.bucketName")
 	//获取保存的目录名
-	pathToSave := filepath.ToSlash(fileStore.GetDefaultPath(getOSSUploadTokeRequest.FileName))
+	pathToSave := filepath.ToSlash(fileStore.GetOSSDefaultPath(getOSSUploadTokeRequest.FileName))
 
 	//检查文件是否存在，如果已经存在
 	isUpload := false

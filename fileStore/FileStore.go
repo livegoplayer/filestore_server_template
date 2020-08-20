@@ -206,6 +206,28 @@ func GetDefaultPath(fileName string) string {
 	return defaultSavePath
 }
 
+//根据文件后缀名获取默认存储路径
+func GetOSSDefaultPath(fileName string) string {
+	ext := myHelper.GetFileExtName(fileName)
+	var Path string
+	if ext == "" {
+		Path = path.Join("/files/", "unknown", "/")
+	} else {
+		Path = path.Join("/files/", ext, "/")
+	}
+
+	defaultSavePath := myHelper.PathToCommon(Path)
+
+	//确保文件夹已经存在
+	err := os.MkdirAll(defaultSavePath, 0666)
+	//如果创建出错
+	if err != nil {
+		panic(err)
+	}
+
+	return defaultSavePath
+}
+
 func CheckFileExists(fileSha1 string) (*model.File, bool) {
 	return model.CheckFileExist(fileSha1)
 }
