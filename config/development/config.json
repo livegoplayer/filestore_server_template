@@ -13,7 +13,8 @@
 
   "auth_middleware": true,
   "user_app_host" : "http://testlocal.52db.work:8080",
-  "file_host" : "http://testlocal.52db.xyz:9091/forward",
+  "preview_host" : "http://testlocal.52db.xyz:9091/forward",
+  "file_host" : "http://testlocal.52db.xyz:9091/dnd",
 
   "log": {
     "access_log_file_path": "../log",

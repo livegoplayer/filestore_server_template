@@ -325,6 +325,7 @@ func OSSUploadSuccessCallbackHandler(c *gin.Context) {
 
 type GetOSSDownloadUrlHandlerRequest struct {
 	UserFileID int `form:"id" validate:"number" json:"id"`
+	Preview    int `form:"preview" json:"preview"`
 }
 
 func GetOssDownLoadUrlHandler(c *gin.Context) {
@@ -334,16 +335,21 @@ func GetOssDownLoadUrlHandler(c *gin.Context) {
 
 	file := fileStore.GetFileMetaByUserFileId(userFile.UserFileID)
 
+	data := make(ResponseData)
 	downLoadUrl := ""
 	if file.StoreType == 1 {
 		downLoadUrl = fileStore.GetOssDownloadUrl(file.BucketName, file.Path)
+		subUrl := myHelper.GetSubStringBetween(downLoadUrl, "http://"+file.BucketName+".oss-cn-shanghai.aliyuncs.com", "")
+		host := ""
+		if userFile.Preview != 0 {
+			host = viper.GetString("preview_host")
+		} else {
+			host = viper.GetString("file_host")
+		}
+		data["download_url"] = host + "/" + file.BucketName + subUrl
 	} else {
 		downLoadUrl = fileStore.GetBaseServerDownloadUrl(file.Path)
 	}
-
-	data := make(ResponseData)
-	subUrl := myHelper.GetSubStringBetween(downLoadUrl, "http://"+file.BucketName+".oss-cn-shanghai.aliyuncs.com", "")
-	data["download_url"] = viper.GetString("file_host") + "/" + file.BucketName + subUrl
 
 	ginHelper.SuccessResp("ok", data)
 }
