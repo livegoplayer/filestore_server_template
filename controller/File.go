@@ -245,16 +245,6 @@ func GetOSSUploadTokenHandler(c *gin.Context) {
 	v.Add("path_id", strconv.Itoa(getOSSUploadTokeRequest.PathId))
 	v.Add("file_size", strconv.Itoa(int(getOSSUploadTokeRequest.FileSize)))
 	v.Add("file_path", pathToSave)
-	//v := &OSSUploadSuccessCallbackHandlerRequest{
-	//	BucketName:  bucketName,
-	//	FileOSSName: fileSsoName,
-	//	FileName:    getOSSUploadTokeRequest.FileName,
-	//	FileSha1:    getOSSUploadTokeRequest.FileSha1,
-	//	Uid:         getOSSUploadTokeRequest.Uid,
-	//	PathId:      getOSSUploadTokeRequest.PathId,
-	//	FileSize:    getOSSUploadTokeRequest.FileSize,
-	//	FileOSSPath: pathToSave,
-	//}
 
 	//callbackParam.CallbackBody = "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}"
 	callbackParam.CallbackBody = v.Encode()

@@ -296,6 +296,8 @@ const (
 	VIDEO  = 3
 	OTHER  = 4
 	PDF    = 5
+	OFFICE = 6
+	TXT    = 7
 )
 
 func GetFileTypeByName(filename string) int {
@@ -309,6 +311,14 @@ func GetFileTypeByName(filename string) int {
 
 	if match, _ := regexp.MatchString("(.*)\\.(pdf)", filename); match {
 		return PDF
+	}
+
+	if match, _ := regexp.MatchString("(.*)\\.(doc|docx|docm|dotx|dotm|xlsx|xlsm|xltx|xltm|xlam|pptx|potx|pptm|potm|ppam|ppsx|ppsm|vsdx|vsdm|vssx|vssm|vstx|vstm)", filename); match {
+		return OFFICE
+	}
+
+	if match, _ := regexp.MatchString("(.*)\\.(txt|me|ME)", filename); match {
+		return TXT
 	}
 
 	return OTHER
