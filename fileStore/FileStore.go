@@ -318,7 +318,7 @@ func GetFileTypeByName(filename string) int {
 		return OFFICE
 	}
 
-	if match, _ := regexp.MatchString("(.*)\\.(txt|me|sql|json)", strings.ToLower(filename)); match {
+	if match, _ := regexp.MatchString("(.*)\\.(txt|me|sql|json|log)", strings.ToLower(filename)); match {
 		return TXT
 	}
 
