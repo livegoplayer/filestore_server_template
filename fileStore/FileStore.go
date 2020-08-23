@@ -23,6 +23,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
@@ -301,23 +302,23 @@ const (
 )
 
 func GetFileTypeByName(filename string) int {
-	if match, _ := regexp.MatchString("(.*)\\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)", filename); match {
+	if match, _ := regexp.MatchString("(.*)\\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)", strings.ToLower(filename)); match {
 		return IMG
 	}
 
-	if match, _ := regexp.MatchString("(.*)\\.(swf|flv|mp4|rmvb|avi|mpeg|ra|ram|mov|wmv)", filename); match {
+	if match, _ := regexp.MatchString("(.*)\\.(swf|flv|mp4|rmvb|avi|mpeg|ra|ram|mov|wmv)", strings.ToLower(filename)); match {
 		return VIDEO
 	}
 
-	if match, _ := regexp.MatchString("(.*)\\.(pdf)", filename); match {
+	if match, _ := regexp.MatchString("(.*)\\.(pdf)", strings.ToLower(filename)); match {
 		return PDF
 	}
 
-	if match, _ := regexp.MatchString("(.*)\\.(doc|docx|docm|dotx|dotm|xlsx|xlsm|xltx|xltm|xlam|pptx|potx|pptm|potm|ppam|ppsx|ppsm|vsdx|vsdm|vssx|vssm|vstx|vstm)", filename); match {
+	if match, _ := regexp.MatchString("(.*)\\.(doc|docx|docm|dotx|dotm|xlsx|xlsm|xltx|xltm|xlam|pptx|potx|pptm|potm|ppam|ppsx|ppsm|vsdx|vsdm|vssx|vssm|vstx|vstm)", strings.ToLower(filename)); match {
 		return OFFICE
 	}
 
-	if match, _ := regexp.MatchString("(.*)\\.(txt|me|ME|sql|SQL|JSON|json)", filename); match {
+	if match, _ := regexp.MatchString("(.*)\\.(txt|me|sql|json)", strings.ToLower(filename)); match {
 		return TXT
 	}
 
