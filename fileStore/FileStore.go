@@ -314,7 +314,7 @@ func GetFileTypeByName(filename string) int {
 		return PDF
 	}
 
-	if match, _ := regexp.MatchString("(.*)\\.(doc|docx|docm|dotx|dotm|xlsx|xlsm|xltx|xltm|xlam|pptx|potx|pptm|potm|ppam|ppsx|ppsm|vsdx|vsdm|vssx|vssm|vstx|vstm)", strings.ToLower(filename)); match {
+	if match, _ := regexp.MatchString("(.*)\\.(docx|dotx|xlsx|xltx|pptx|potx|ppsx)", strings.ToLower(filename)); match {
 		return OFFICE
 	}
 
