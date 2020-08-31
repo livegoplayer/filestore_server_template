@@ -283,6 +283,10 @@ github.com/livegoplayer/go_logger v1.0.12 h1:oJF/WQo+ARGuFqrkf26INKjLtZxbJtsDiXg
 github.com/livegoplayer/go_logger v1.0.12/go.mod h1:w6Cv+hxj6rHeUYEQi6ijKThGs1F6JXAr2Ze3Ei/EsgM=
 github.com/livegoplayer/go_logger v1.0.15 h1:FG5G4kWOsAVGEKrQHiuF4gYDCCRzenzyutzgg2BT2U0=
 github.com/livegoplayer/go_logger v1.0.15/go.mod h1:w6Cv+hxj6rHeUYEQi6ijKThGs1F6JXAr2Ze3Ei/EsgM=
+github.com/livegoplayer/go_logger v1.0.16 h1:nWZlcDdpJ6PBNk046TXIReKZj3MsHxUuOsQ2qRhZ0X0=
+github.com/livegoplayer/go_logger v1.0.16/go.mod h1:mEFxsW9TAJj/AXiRjrHTPN6ZxebhNTDQpfrI5K8MamI=
+github.com/livegoplayer/go_mq_helper v1.0.8 h1:OhCUOd7pLehoh6BhzMA7xgym+8VszPe8Q6w18iqCbWw=
+github.com/livegoplayer/go_mq_helper v1.0.8/go.mod h1:DORaw9EwNJCLPDtKWvVBhhYwSzgZT8MQdKDqaZ7ybDw=
 github.com/livegoplayer/go_redis_helper v1.0.2 h1:KswVSIjgH6AZp9+oMdPTdaFMefMlJSsdiwagN9BHahc=
 github.com/livegoplayer/go_redis_helper v1.0.2/go.mod h1:JKp80b2ddnxt1NWoxl6QUTkVAFPBo9C0j/oFT6U/FEg=
 github.com/livegoplayer/go_session v1.0.2/go.mod h1:pr99hPKCAN7J7Ll30A7ow65F7faWCwvtQbWLvmnhD/g=
@@ -444,6 +448,8 @@ github.com/spf13/viper v1.7.1 h1:pM5oEahlgWv/WnHXpgbKz7iLIxRf65tye2Ci+XFK5sk=
 github.com/spf13/viper v1.7.1/go.mod h1:8WkrPz2fc9jxqZNCJI/76HCieCp4Q8HaLFoCha5qpdg=
 github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
 github.com/streadway/amqp v0.0.0-20190827072141-edfb9018d271/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
+github.com/streadway/amqp v1.0.0 h1:kuuDrUJFZL1QYL9hUNuCxNObNzB0bV/ZG5jV3RWAQgo=
+github.com/streadway/amqp v1.0.0/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
 github.com/streadway/handy v0.0.0-20190108123426-d5acb3125c2a/go.mod h1:qNTQ5P5JnDBl6z3cMAg/SywNDC5ABu5ApDIw6lUbRmI=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
@@ -455,6 +461,7 @@ github.com/subosito/gotenv v1.2.0 h1:Slr1R9HxAlEKefgq5jn9U+DnETlIUa6HfgEzj0g5d7s
 github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69rRypqCw=
 github.com/tebeka/strftime v0.1.4 h1:e0FKSyxthD1Xk4cIixFPoyfD33u2SbjNngOaaC3ePoU=
 github.com/tebeka/strftime v0.1.4/go.mod h1:7wJm3dZlpr4l/oVK0t1HYIc4rMzQ2XJlOMIUJUJH6XQ=
+github.com/tebeka/strftime v0.1.5/go.mod h1:29/OidkoWHdEKZqzyDLUyC+LmgDgdHo4WAFCDT7D/Ig=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/ugorji/go v1.1.7 h1:/68gy2h+1mWMrwZFeD1kQialdSzAb432dtpeJ42ovdo=

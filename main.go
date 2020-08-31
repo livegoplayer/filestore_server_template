@@ -16,7 +16,7 @@ import (
 	dbHelper "github.com/livegoplayer/go_db_helper"
 	ginHelper "github.com/livegoplayer/go_gin_helper"
 	. "github.com/livegoplayer/go_helper"
-	myLogger "github.com/livegoplayer/go_logger"
+	myLogger "github.com/livegoplayer/go_logger/logger"
 )
 
 func main() {
