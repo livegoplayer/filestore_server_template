@@ -14,7 +14,7 @@ require (
 	github.com/livegoplayer/go_gin_helper v1.0.20
 	github.com/livegoplayer/go_helper v1.0.43
 	github.com/livegoplayer/go_logger v1.0.16
-	github.com/livegoplayer/go_user_rpc v1.0.34
+	github.com/livegoplayer/go_user_rpc v1.0.37
 	github.com/magiconair/properties v1.8.2 // indirect
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
 	github.com/satori/go.uuid v1.2.0 // indirect
