@@ -12,7 +12,7 @@ func InitAppRouter(r *gin.Engine) {
 	userGroup := r.Group("/api/user")
 	{
 		userGroup.POST("/checkToken", CheckTokenHandler)
-		userGroup.GET("/logout", LogoutHandler)
+		userGroup.POST("/logout", LogoutHandler)
 	}
 
 	//各种中间件调用顺序不能变
