@@ -63,7 +63,7 @@ func main() {
 		appLogger = myLogger.GetConsoleLogger()
 	} else {
 		if viper.GetBool("log.log_with_rabbitmq") {
-			appLogger = myLogger.GetRabbitMqLogger(viper.GetString("log.rabbimq.url"), viper.GetString("log.rabbimq.routingKey"), viper.GetString("log.rabbimq.exchange"), myLogger.GO_USER)
+			appLogger = myLogger.GetRabbitMqLogger(viper.GetString("log.rabbimq.url"), viper.GetString("log.rabbimq.routingKey"), viper.GetString("log.rabbimq.exchange"), myLogger.GO_FILE_STORE)
 		} else {
 			appLogger = myLogger.GetMysqlLogger(viper.GetString("log.app_log_mysql_host"), viper.GetString("log.app_log_mysql_port"), viper.GetString("log.app_log_mysql_db_name"), viper.GetString("log.app_log_mysql_table_name"), viper.GetString("log.app_log_mysql_user"), viper.GetString("log.app_log_mysql_pass"))
 		}
