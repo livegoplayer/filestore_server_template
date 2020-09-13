@@ -8,21 +8,21 @@
   ],
 
   "app_name" : "file_store",
-  "app_host" : "www.52db.xyz",
+  "app_host" : "www.52db.club",
   "app_port" : "80",
   "app_file_path" : "../files/",
   "app_file_url_path" : "/files",
 
   "auth_middleware": true,
-  "user_app_host" : "http://139.224.132.234/vue_user_pro/",
-  "file_host" : "http://www.52db.xyz/dnd",
-  "preview_host" : "http://www.52db.xyz/forward",
+  "user_app_host" : "http://user.52db.club/vue_user_pro/",
+  "file_host" : "http://file.52db.club/dnd",
+  "preview_host" : "http://file.52db.club/forward",
 
   "log": {
     "access_log_file_path": "../log",
     "access_log_file_name": "access.log",
     "app_log_mysql_host": "139.224.132.234",
-    "app_log_mysql_port": "3306",
+    "app_log_mysql_port": "30306",
     "app_log_mysql_db_name": "file_store",
     "app_log_mysql_table_name": "fs_app_log",
     "app_log_mysql_user": "myuser",
@@ -39,14 +39,14 @@
     "username": "myuser",
     "password": "myuser",
     "host": "139.224.132.234",
-    "port": 3306,
+    "port": 30306,
     "dbname": "file_store",
     "log_mode": true,
     "max_open_connection": 10,
     "max_idle_connection": 200
   },
 
-  "sso_host": "www.52db.club:8080",
+  "sso_host": "139.224.132.234:32000",
 
   "oss": {
     "endpoint": "oss-cn-shanghai.aliyuncs.com",
