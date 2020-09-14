@@ -10,7 +10,7 @@
   ],
 
   "app_name" : "file_store",
-  "app_host" : "www.52db.club",
+  "app_host" : "file.store.52db.club",
   "app_port" : "80",
   "app_file_path" : "../files/",
   "app_file_url_path" : "/files",
