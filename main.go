@@ -43,10 +43,6 @@ func main() {
 		r.Use(gin.Logger())
 	}
 
-	r.Use(ginHelper.ErrHandler())
-
-	InitAppRouter(r)
-
 	//gin的格式化参数
 	//初始化access_log
 	r.Use(myLogger.GetGinAccessFileLogger(viper.GetString("log.access_log_file_path"), viper.GetString("app_name")+"_"+viper.GetString("log.access_log_file_name")))
@@ -55,6 +51,7 @@ func main() {
 		r.Use(gin.Logger())
 		//额外输出错误异常栈
 	}
+	r.Use(ginHelper.ErrHandler())
 
 	//初始化 app_log， 以后使用mylogger.Info() 打印log
 	//如果是debug模式的话，直接打印到控制台
@@ -78,6 +75,8 @@ func main() {
 
 	//oss上传
 	fileStore.InitOSSClient(viper.GetString("oss.accessKeyId"), viper.GetString("oss.accessKeySecret"), viper.GetString("oss.endpoint"))
+
+	InitAppRouter(r)
 
 	//初始化本地上传位置
 	fileStore.InitFileDefaultPath(viper.GetString("app_file_path"))

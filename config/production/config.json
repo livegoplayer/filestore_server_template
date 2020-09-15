@@ -5,7 +5,7 @@
     "http://www.52db.work",
     "https://file.52db.club",
     "http://file.52db.club",
-    "http//:127.0.0.1",
+    "http://127.0.0.1",
     "http://gofilestore.oss-cn-shanghai.aliyuncs.com"
   ],
 
@@ -48,7 +48,8 @@
     "max_idle_connection": 200
   },
 
-  "sso_host": "139.224.132.234:32000",
+  "sso_host_1": "139.224.132.234:32000",
+  "sso_host": "127.0.0.1:8888",
 
   "oss": {
     "endpoint": "oss-cn-shanghai.aliyuncs.com",
