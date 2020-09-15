@@ -48,8 +48,7 @@
     "max_idle_connection": 200
   },
 
-  "sso_host_1": "139.224.132.234:32000",
-  "sso_host": "127.0.0.1:8888",
+  "sso_host": "139.224.132.234:32000",
 
   "oss": {
     "endpoint": "oss-cn-shanghai.aliyuncs.com",

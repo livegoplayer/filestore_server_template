@@ -7,10 +7,8 @@ services:
       environment:
          SERVICE_NAME: go_filestore
          SERVICE_TAGS: go_filestore,http,80
-      extra_hosts:
-         - "www.52db.club:139.224.132.234"
       ports:
-         - "81:80"
+         - "80:80"
       volumes:
          - ../:/apps
          # 日志存放路径，需要同级目录创建本目录
