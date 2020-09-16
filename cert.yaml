@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: file-store-imroc-io
+  namespace: file-store
+spec:
+  secretName: file-store-imroc-io-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - file.store.52db.club
