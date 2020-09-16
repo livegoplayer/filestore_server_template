@@ -6,7 +6,7 @@
     "https://file.52db.club",
     "http://file.52db.club",
     "http://127.0.0.1",
-    "http://gofilestore.oss-cn-shanghai.aliyuncs.com"
+    "http://xxxxxx.oss-cn-shanghai.aliyuncs.com"
   ],
 
   "app_name" : "file_store",
@@ -23,15 +23,15 @@
   "log": {
     "access_log_file_path": "../log",
     "access_log_file_name": "access.log",
-    "app_log_mysql_host": "139.224.132.234",
-    "app_log_mysql_port": "30306",
+    "app_log_mysql_host": "127.0.0.1",
+    "app_log_mysql_port": "3306",
     "app_log_mysql_db_name": "file_store",
     "app_log_mysql_table_name": "fs_app_log",
-    "app_log_mysql_user": "myuser",
-    "app_log_mysql_pass": "myuser",
+    "app_log_mysql_user": "user",
+    "app_log_mysql_pass": "user",
     "log_with_rabbitmq": true,
     "rabbimq":{
-      "url": "amqp://guest:guest@139.224.132.234:31001/",
+      "url": "amqp://guest:guest@127.0.0.1:5672/",
       "routingKey": "log_go_user",
       "exchange": "log"
     }
@@ -40,7 +40,7 @@
   "database": {
     "username": "myuser",
     "password": "myuser",
-    "host": "139.224.132.234",
+    "host": "127.0.0.1",
     "port": 30306,
     "dbname": "file_store",
     "log_mode": true,
@@ -48,12 +48,12 @@
     "max_idle_connection": 200
   },
 
-  "sso_host": "139.224.132.234:32000",
+  "sso_host": "127.0.0.1:32000",
 
   "oss": {
     "endpoint": "oss-cn-shanghai.aliyuncs.com",
-    "accessKeyId": "LTAI4FzXAe9gvRyvtLEqMJGA",
-    "accessKeySecret": "SPn1T98ndadqUn5tbD7lMyKMvt0STe",
+    "accessKeyId": "xxxxxxxxxxxxxxxx",
+    "accessKeySecret": "xxxxxxxxxxxxxxxxx",
     "bucketName": "gofilestore"
   }
 }
